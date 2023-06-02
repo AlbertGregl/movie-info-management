@@ -1,0 +1,5 @@
+hr\gregl\utilities\MessageUtils.class
+hr\gregl\factory\UrlConnectionFactory.class
+hr\gregl\utilities\FileUtils.class
+hr\gregl\utilities\IconUtils.class
+hr\gregl\factory\ParserFactory.class
