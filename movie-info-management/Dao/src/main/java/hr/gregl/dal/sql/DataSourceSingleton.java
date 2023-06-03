@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 /**
  *
  * @author dbele
+ * @author albert
  */
 public final class DataSourceSingleton {
     

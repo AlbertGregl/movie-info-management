@@ -1,5 +1,3 @@
-hr\gregl\model\Article.class
 hr\gregl\dal\sql\DataSourceSingleton.class
 hr\gregl\dal\Repository.class
 hr\gregl\dal\RepositoryFactory.class
-hr\gregl\dal\sql\SqlRepository.class

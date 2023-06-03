@@ -16,8 +16,10 @@ CREATE TABLE dbo.[Role] (
 GO
 
 -- Fill table with:
--- ADMINISTRATOR
--- USER
+INSERT INTO dbo.[Role] (RoleName)
+VALUES ('ADMINISTRATOR'),
+       ('USER');
+GO
 
 -- Retrieve a role by id
 CREATE PROCEDURE selectRole
