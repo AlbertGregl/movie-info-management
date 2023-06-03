@@ -12,14 +12,8 @@ import java.util.List;
  * @author albert
  */
 public interface MovieActorDirectorRepository {
-
     void add(MovieActorDirector mad);
-
-    void delete(MovieActorDirector mad);
-
-    void update(MovieActorDirector mad);
-
-    List<MovieActorDirector> getAll();
-
-    MovieActorDirector get(int movieID, int actorID, int directorID);
+    void delete(int movieId, int actorId, int directorId);
+    MovieActorDirector selectById(int movieId, int actorId, int directorId);
+    List<MovieActorDirector> selectAll();
 }

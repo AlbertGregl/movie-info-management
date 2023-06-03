@@ -4,7 +4,7 @@
  */
 package hr.gregl.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,19 +14,19 @@ public final class Actor {
 
     private int actorID;
     private String name;
-    private Date dob;
+    private LocalDate dob;
     private String imagePath;
 
     public Actor() {
     }
 
-    public Actor(String name, Date dob, String imagePath) {
+    public Actor(String name, LocalDate dob, String imagePath) {
         this.name = name;
         this.dob = dob;
         this.imagePath = imagePath;
     }
 
-    public Actor(int actorID, String name, Date dob, String imagePath) {
+    public Actor(int actorID, String name, LocalDate dob, String imagePath) {
         this(name, dob, imagePath);
         this.actorID = actorID;
     }
@@ -47,11 +47,11 @@ public final class Actor {
         this.name = name;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

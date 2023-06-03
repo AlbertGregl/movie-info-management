@@ -5,12 +5,10 @@
 package hr.gregl.dal;
 
 import hr.gregl.model.Director;
-import java.util.List;
 
 /**
  *
  * @author albert
  */
 public interface DirectorRepository extends Repository<Director> {
-    List<Director> searchByMovie(String movieTitle);
 }

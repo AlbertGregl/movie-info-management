@@ -5,12 +5,10 @@
 package hr.gregl.dal;
 
 import hr.gregl.model.Actor;
-import java.util.List;
 
 /**
  *
  * @author albert
  */
-public interface ActorRepository extends Repository<Actor>{
-    List<Actor> searchByMovie(String movieTitle);
+public interface ActorRepository extends Repository<Actor> {
 }

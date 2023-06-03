@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author daniel.bele
+ * @author albert
  */
 public final class RepositoryFactory {
 

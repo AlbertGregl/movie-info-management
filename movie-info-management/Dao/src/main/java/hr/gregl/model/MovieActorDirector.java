@@ -14,45 +14,45 @@ package hr.gregl.model;
  */
 public final class MovieActorDirector {
 
-    private int movieID;
-    private int actorID;
-    private int directorID;
+    private int movieId;
+    private int actorId;
+    private int directorId;
 
     public MovieActorDirector() {
     }
 
     public MovieActorDirector(int movieID, int actorID, int directorID) {
-        this.movieID = movieID;
-        this.actorID = actorID;
-        this.directorID = directorID;
+        this.movieId = movieID;
+        this.actorId = actorID;
+        this.directorId = directorID;
     }
 
     public int getMovieID() {
-        return movieID;
+        return movieId;
     }
 
     public void setMovieID(int movieID) {
-        this.movieID = movieID;
+        this.movieId = movieID;
     }
 
     public int getActorID() {
-        return actorID;
+        return actorId;
     }
 
     public void setActorID(int actorID) {
-        this.actorID = actorID;
+        this.actorId = actorID;
     }
 
     public int getDirectorID() {
-        return directorID;
+        return directorId;
     }
 
     public void setDirectorID(int directorID) {
-        this.directorID = directorID;
+        this.directorId = directorID;
     }
 
     @Override
     public String toString() {
-        return "MovieID: " + movieID + ", ActorID: " + actorID + ", DirectorID: " + directorID;
+        return "MovieID: " + movieId + ", ActorID: " + actorId + ", DirectorID: " + directorId;
     }
 }

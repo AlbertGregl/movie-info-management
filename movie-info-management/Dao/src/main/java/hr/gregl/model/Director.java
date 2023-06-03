@@ -4,7 +4,7 @@
  */
 package hr.gregl.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,31 +12,31 @@ import java.util.Date;
  */
 public final class Director {
 
-    private int directorID;
+    private int directorId;
     private String name;
-    private Date dob;
+    private LocalDate dob;
     private String imagePath;
 
     public Director() {
     }
 
-    public Director(String name, Date dob, String imagePath) {
+    public Director(String name, LocalDate dob, String imagePath) {
         this.name = name;
         this.dob = dob;
         this.imagePath = imagePath;
     }
 
-    public Director(int directorID, String name, Date dob, String imagePath) {
+    public Director(int directorID, String name, LocalDate dob, String imagePath) {
         this(name, dob, imagePath);
-        this.directorID = directorID;
+        this.directorId = directorID;
     }
 
     public int getDirectorID() {
-        return directorID;
+        return directorId;
     }
 
     public void setDirectorID(int directorID) {
-        this.directorID = directorID;
+        this.directorId = directorID;
     }
 
     public String getName() {
@@ -47,11 +47,11 @@ public final class Director {
         this.name = name;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -65,6 +65,6 @@ public final class Director {
 
     @Override
     public String toString() {
-        return directorID + " - " + name + " - " + dob.toString();
+        return directorId + " - " + name + " - " + dob.toString();
     }
 }

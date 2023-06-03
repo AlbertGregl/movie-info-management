@@ -8,37 +8,27 @@ package hr.gregl.model;
  *
  * @author albert
  */
-public final class Role {
+public enum Role {
+    ADMINISTRATOR(1),
+    USER(2);
+    
 
-    private int roleID;
-    private String roleName;
+    private final int id;
 
-    public Role() {
+    Role(int id) {
+        this.id = id;
     }
 
-    public Role(int roleID, String roleName) {
-        this.roleID = roleID;
-        this.roleName = roleName;
+    public int getId() {
+        return id;
     }
 
-    public int getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    @Override
-    public String toString() {
-        return "RoleID: " + roleID + ", RoleName: " + roleName;
+    public static Role getById(int id) {
+        for (Role role : values()) {
+            if (role.getId() == id) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("Invalid Role id: " + id);
     }
 }

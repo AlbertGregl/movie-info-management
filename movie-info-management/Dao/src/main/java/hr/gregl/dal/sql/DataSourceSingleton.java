@@ -8,6 +8,7 @@ package hr.gregl.dal.sql;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,8 @@ import javax.sql.DataSource;
  * @author dbele
  */
 public final class DataSourceSingleton {
+    
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String PATH = "/config/db.properties";
 

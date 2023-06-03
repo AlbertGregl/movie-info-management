@@ -4,13 +4,16 @@
  */
 package hr.gregl.dal;
 
+import java.util.List;
+
 /**
  *
  * @author albert
  */
 public interface Repository<T> {
-    T create(T t);
-    T read(int id);
-    T update(T t);
+    void add(T item);
     void delete(int id);
+    void update(T item);
+    T selectById(int id);
+    List<T> selectAll();
 }

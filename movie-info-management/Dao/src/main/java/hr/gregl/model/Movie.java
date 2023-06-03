@@ -10,7 +10,7 @@ package hr.gregl.model;
  */
 public final class Movie {
 
-    private int movieID;
+    private int movieId;
     private String title;
     private String genre;
     private int releaseYear;
@@ -28,15 +28,15 @@ public final class Movie {
 
     public Movie(int movieID, String title, String genre, int releaseYear, String imagePath) {
         this(title, genre, releaseYear, imagePath);
-        this.movieID = movieID;
+        this.movieId = movieID;
     }
 
     public int getMovieID() {
-        return movieID;
+        return movieId;
     }
 
     public void setMovieID(int movieID) {
-        this.movieID = movieID;
+        this.movieId = movieID;
     }
 
     public String getTitle() {
@@ -73,6 +73,6 @@ public final class Movie {
 
     @Override
     public String toString() {
-        return movieID + " - " + title + " - " + genre + " - " + releaseYear;
+        return movieId + " - " + title + " - " + genre + " - " + releaseYear;
     }
 }
