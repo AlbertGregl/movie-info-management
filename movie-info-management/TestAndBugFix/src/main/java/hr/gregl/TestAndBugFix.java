@@ -4,7 +4,6 @@
 package hr.gregl;
 
 import hr.gregl.service.DatabaseService;
-import java.sql.SQLException;
 
 /**
  *
@@ -13,23 +12,11 @@ import java.sql.SQLException;
 public class TestAndBugFix {
 
     public static void main(String[] args) {
+        DatabaseService dbService = new DatabaseService();
 
-        try {
-            
-            // Initialize the database
-            System.out.println("Initializing database...");
-            DatabaseService.initializeDatabase();
-            System.out.println("Database initialized successfully.");
+        System.out.println("Filling database with data...");
+        dbService.fillDatabaseWithMockData();
+        System.out.println("Data has been inserted successfully.");
 
-
-            // delete database
-            // System.out.println("Deleting database...");
-            // DatabaseService.deleteDatabase();
-            // System.out.println("Database deleted successfully.");
-            
-        } catch (SQLException e) {
-            System.err.println("SQL error: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }
