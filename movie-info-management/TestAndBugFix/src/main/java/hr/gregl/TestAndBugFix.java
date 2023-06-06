@@ -12,11 +12,11 @@ import hr.gregl.service.DatabaseService;
 public class TestAndBugFix {
 
     public static void main(String[] args) {
+        
         DatabaseService dbService = new DatabaseService();
 
-        System.out.println("Filling database with data...");
         dbService.fillDatabaseWithMockData();
-        System.out.println("Data has been inserted successfully.");
+
 
     }
 }

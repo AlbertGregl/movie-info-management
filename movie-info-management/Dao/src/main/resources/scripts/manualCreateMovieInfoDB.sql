@@ -15,11 +15,7 @@ CREATE TABLE dbo.[Role] (
 );
 GO
 
--- Fill table with:
-INSERT INTO dbo.[Role] (RoleName)
-VALUES ('ADMINISTRATOR'),
-       ('USER');
-GO
+INSERT INTO dbo.[Role] (RoleName) VALUES ('ADMINISTRATOR'), ('USER');
 
 -- Retrieve a role by id
 CREATE PROCEDURE selectRole
@@ -44,6 +40,8 @@ CREATE TABLE dbo.[User] (
     FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
 );
 GO
+
+INSERT INTO dbo.[User] (Username, Password, RoleID) VALUES ('milica', 'milica', 2), ('pero', 'pero', 2), ('admin', 'admin', 1);
 
 -- Add a new user
 CREATE PROCEDURE addUser

@@ -37,6 +37,7 @@ public class DatabaseService {
         executeSqlScript(DELETE_DATA_SCRIPT_PATH);
     }
 
+
     private void executeSqlScript(String scriptPath) {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(scriptPath)) {
             if (is == null) {
@@ -62,5 +63,6 @@ public class DatabaseService {
             LOGGER.log(Level.SEVERE, "Failed to load SQL script: " + scriptPath, ex);
         }
     }
+
 
 }
