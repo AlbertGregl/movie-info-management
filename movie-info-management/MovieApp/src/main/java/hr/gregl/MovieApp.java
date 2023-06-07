@@ -4,17 +4,34 @@
  */
 package hr.gregl;
 
+import hr.gregl.model.User;
+import hr.gregl.view.ActorPanel;
+import hr.gregl.view.AdminPanel;
+import hr.gregl.view.DirectorPanel;
+import hr.gregl.view.LoginPanel;
+import hr.gregl.view.MoviePanel;
+
 /**
  *
- * @author alber
+ * @author albert
  */
 public class MovieApp extends javax.swing.JFrame {
+
+    // user
+    private User user;
 
     /**
      * Creates new form MovieApp
      */
     public MovieApp() {
         initComponents();
+
+        // set user with login form
+        setupUser();
+
+
+        configureUserPanels();
+        configureAdminPanels();
     }
 
     /**
@@ -26,18 +43,35 @@ public class MovieApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        tpContent = new javax.swing.JTabbedPane();
+        menuMain = new javax.swing.JMenuBar();
+        menuUser = new javax.swing.JMenu();
+        menuItemLogout = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        menuItemExit = new javax.swing.JMenuItem();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(808, 600));
+        setSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(new java.awt.CardLayout());
+
+        tpContent.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        tpContent.setMinimumSize(new java.awt.Dimension(800, 600));
+        tpContent.setName(""); // NOI18N
+        getContentPane().add(tpContent, "card2");
+
+        menuUser.setText("Username");
+
+        menuItemLogout.setText("Logout");
+        menuUser.add(menuItemLogout);
+        menuUser.add(jSeparator1);
+
+        menuItemExit.setText("Exit");
+        menuUser.add(menuItemExit);
+
+        menuMain.add(menuUser);
+
+        setJMenuBar(menuMain);
 
         pack();
         setLocationRelativeTo(null);
@@ -79,5 +113,37 @@ public class MovieApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemLogout;
+    private javax.swing.JMenuBar menuMain;
+    private javax.swing.JMenu menuUser;
+    private javax.swing.JTabbedPane tpContent;
     // End of variables declaration//GEN-END:variables
+
+    private void setupUser() {
+        tpContent.addTab("Login", new LoginPanel());
+
+        // set user based on login
+        user = new User();
+
+
+    }
+
+    private void configureUserPanels() {
+
+        tpContent.addTab("Movie", new MoviePanel());
+        tpContent.addTab("Actor", new ActorPanel());
+        tpContent.addTab("Director", new DirectorPanel());
+
+    }
+
+    private void configureAdminPanels() {
+        configureUserPanels();
+        tpContent.addTab("Administrator", new AdminPanel());
+
+    }
+
+
+
 }
