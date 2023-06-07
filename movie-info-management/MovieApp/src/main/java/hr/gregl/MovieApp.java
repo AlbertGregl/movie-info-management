@@ -6,7 +6,7 @@ package hr.gregl;
 
 /**
  *
- * @author albert
+ * @author alber
  */
 public class MovieApp extends javax.swing.JFrame {
 
