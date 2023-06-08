@@ -7,12 +7,13 @@ package hr.gregl.view;
 import hr.gregl.controller.LoginController;
 import hr.gregl.listeners.LoginListener;
 import hr.gregl.model.User;
+import hr.gregl.model.Role;
 
 /**
  *
  * @author albert
  */
-public class LoginPanel extends javax.swing.JPanel{
+public class LoginPanel extends javax.swing.JPanel {
 
     private LoginController loginController;
 
@@ -39,7 +40,7 @@ public class LoginPanel extends javax.swing.JPanel{
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -60,10 +61,13 @@ public class LoginPanel extends javax.swing.JPanel{
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(jLabel1, gridBagConstraints);
+
+        tfUsername.setMinimumSize(new java.awt.Dimension(120, 22));
+        tfUsername.setName(""); // NOI18N
+        tfUsername.setPreferredSize(new java.awt.Dimension(120, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
@@ -83,7 +87,7 @@ public class LoginPanel extends javax.swing.JPanel{
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
         add(lblSuccess, gridBagConstraints);
@@ -106,7 +110,6 @@ public class LoginPanel extends javax.swing.JPanel{
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
@@ -121,27 +124,41 @@ public class LoginPanel extends javax.swing.JPanel{
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(btnLogin, gridBagConstraints);
+
+        tfPassword.setMinimumSize(new java.awt.Dimension(120, 22));
+        tfPassword.setName(""); // NOI18N
+        tfPassword.setPreferredSize(new java.awt.Dimension(120, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         add(tfPassword, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
-        //TODO
+        String username = tfUsername.getText();
+        String password = tfPassword.getText();
+
+        User user = new User(username, password, Role.USER);
+
+        loginController.register(user);
+
+        lblSuccess.setText("User registered successfully!");
+        lblSuccess.setVisible(true);
     }
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
         String username = tfUsername.getText();
         String password = tfPassword.getText();
         User user = loginController.login(username, password);
-        
+
         if (user != null) {
             if (loginListener != null) {
                 loginListener.onLoginSuccess(user);

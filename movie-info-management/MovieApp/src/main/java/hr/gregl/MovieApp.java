@@ -5,6 +5,7 @@
 package hr.gregl;
 
 import hr.gregl.listeners.LoginListener;
+import hr.gregl.model.Role;
 import hr.gregl.model.User;
 import hr.gregl.view.ActorPanel;
 import hr.gregl.view.AdminPanel;
@@ -18,7 +19,6 @@ import hr.gregl.view.MoviePanel;
  */
 public class MovieApp extends javax.swing.JFrame implements LoginListener {
 
-    // user
     private User currentUser;
 
     /**
@@ -27,7 +27,8 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
     public MovieApp() {
         initComponents();
 
-        // set user with login form
+        setUpForm();
+
         setupUser();
     }
 
@@ -48,8 +49,8 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
         menuItemExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         setName("MainFrame"); // NOI18N
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(808, 600));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -60,12 +61,25 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
         getContentPane().add(tpContent, "card2");
 
         menuUser.setText("Username");
+        menuUser.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
+        menuItemLogout.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         menuItemLogout.setText("Logout");
+        menuItemLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemLogoutActionPerformed(evt);
+            }
+        });
         menuUser.add(menuItemLogout);
         menuUser.add(jSeparator1);
 
+        menuItemExit.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         menuItemExit.setText("Exit");
+        menuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemExitActionPerformed(evt);
+            }
+        });
         menuUser.add(menuItemExit);
 
         menuMain.add(menuUser);
@@ -75,6 +89,19 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
+        // extit the app
+        System.exit(0);
+    }//GEN-LAST:event_menuItemExitActionPerformed
+
+    private void menuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLogoutActionPerformed
+        // remove all tabs
+        tpContent.removeAll();
+        
+        setUpForm();
+        setupUser();
+    }//GEN-LAST:event_menuItemLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,15 +149,19 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
 
     private void setupUser() {
         LoginPanel loginPanel = new LoginPanel();
-        loginPanel.setLoginListener(this); // Set the MovieApp as the login listener
+        // set the MovieApp as the login listener
+        loginPanel.setLoginListener(this);
         tpContent.addTab("Login", loginPanel);
     }
 
     @Override
     public void onLoginSuccess(User user) {
         currentUser = user;
+        // chnage tpContent name to username
+        menuUser.setText("User: " + currentUser.getUsername());
+
         // Configure panels based on user type
-        if (user.getUsername() == "admin") {
+        if (user.getRole() == Role.ADMINISTRATOR) {
             configureAdminPanels();
         } else {
             configureUserPanels();
@@ -138,6 +169,9 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
     }
 
     private void configureUserPanels() {
+        // remove login panel
+        tpContent.remove(0);
+        // add movie, actor and director panels
         tpContent.addTab("Movie", new MoviePanel());
         tpContent.addTab("Actor", new ActorPanel());
         tpContent.addTab("Director", new DirectorPanel());
@@ -146,6 +180,10 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
     private void configureAdminPanels() {
         configureUserPanels();
         tpContent.addTab("Administrator", new AdminPanel());
+    }
+
+    private void setUpForm() {
+        menuUser.setText("User");
     }
 
 }
