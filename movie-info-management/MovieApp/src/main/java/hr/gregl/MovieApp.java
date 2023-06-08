@@ -4,6 +4,7 @@
  */
 package hr.gregl;
 
+import hr.gregl.listeners.LoginListener;
 import hr.gregl.model.User;
 import hr.gregl.view.ActorPanel;
 import hr.gregl.view.AdminPanel;
@@ -15,10 +16,10 @@ import hr.gregl.view.MoviePanel;
  *
  * @author albert
  */
-public class MovieApp extends javax.swing.JFrame {
+public class MovieApp extends javax.swing.JFrame implements LoginListener {
 
     // user
-    private User user;
+    private User currentUser;
 
     /**
      * Creates new form MovieApp
@@ -28,10 +29,6 @@ public class MovieApp extends javax.swing.JFrame {
 
         // set user with login form
         setupUser();
-
-
-        configureUserPanels();
-        configureAdminPanels();
     }
 
     /**
@@ -51,6 +48,8 @@ public class MovieApp extends javax.swing.JFrame {
         menuItemExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("MainFrame"); // NOI18N
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(808, 600));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -122,28 +121,31 @@ public class MovieApp extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setupUser() {
-        tpContent.addTab("Login", new LoginPanel());
+        LoginPanel loginPanel = new LoginPanel();
+        loginPanel.setLoginListener(this); // Set the MovieApp as the login listener
+        tpContent.addTab("Login", loginPanel);
+    }
 
-        // set user based on login
-        user = new User();
-
-
+    @Override
+    public void onLoginSuccess(User user) {
+        currentUser = user;
+        // Configure panels based on user type
+        if (user.getUsername() == "admin") {
+            configureAdminPanels();
+        } else {
+            configureUserPanels();
+        }
     }
 
     private void configureUserPanels() {
-
         tpContent.addTab("Movie", new MoviePanel());
         tpContent.addTab("Actor", new ActorPanel());
         tpContent.addTab("Director", new DirectorPanel());
-
     }
 
     private void configureAdminPanels() {
         configureUserPanels();
         tpContent.addTab("Administrator", new AdminPanel());
-
     }
-
-
 
 }
