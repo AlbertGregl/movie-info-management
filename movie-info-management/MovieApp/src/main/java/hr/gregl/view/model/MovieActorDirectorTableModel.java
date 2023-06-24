@@ -5,6 +5,7 @@
 package hr.gregl.view.model;
 
 import hr.gregl.controller.ActorController;
+import hr.gregl.controller.MovieActorDirectorController;
 import hr.gregl.model.MovieActorDirector;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -18,11 +19,11 @@ public class MovieActorDirectorTableModel extends AbstractTableModel {
     private static final String[] COLUMN_NAMES = {"Movie", "Actor", "Director"};
 
     private List<MovieActorDirector> mads;
-    private ActorController actorController;
+    private MovieActorDirectorController madController;
 
-    public MovieActorDirectorTableModel(List<MovieActorDirector> mads, ActorController actorController) {
+    public MovieActorDirectorTableModel(List<MovieActorDirector> mads, MovieActorDirectorController madController) {
         this.mads = mads;
-        this.actorController = actorController;
+        this.madController = madController;
     }
 
     @Override
@@ -46,11 +47,11 @@ public class MovieActorDirectorTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return actorController.getMovieById(mad.getMovieID()).getTitle();
+                return madController.getMovieById(mad.getMovieID()).getTitle();
             case 1:
-                return actorController.getActorById(mad.getActorID()).getName();
+                return madController.getActorById(mad.getActorID()).getName();
             case 2:
-                return actorController.getDirectorById(mad.getDirectorID()).getName();
+                return madController.getDirectorById(mad.getDirectorID()).getName();
             default:
                 throw new IllegalArgumentException("Invalid column index");
         }

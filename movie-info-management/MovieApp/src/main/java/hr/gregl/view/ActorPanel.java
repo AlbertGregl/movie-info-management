@@ -5,6 +5,7 @@
 package hr.gregl.view;
 
 import hr.gregl.controller.ActorController;
+import hr.gregl.controller.MovieActorDirectorController;
 import hr.gregl.model.Actor;
 import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
@@ -36,6 +37,7 @@ import static javax.swing.text.html.HTML.Attribute.DIR;
 public class ActorPanel extends javax.swing.JPanel {
 
     private ActorController actorController;
+    private MovieActorDirectorController madController;
 
     private List<JTextComponent> validationFields;
     private List<JLabel> errorLabels;
@@ -333,16 +335,6 @@ public class ActorPanel extends javax.swing.JPanel {
         tbFilmography.setName(""); // NOI18N
         tbFilmography.setPreferredSize(new java.awt.Dimension(100, 400));
         tbFilmography.setRowMargin(1);
-        tbFilmography.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbFilmographyMouseClicked(evt);
-            }
-        });
-        tbFilmography.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tbFilmographyKeyReleased(evt);
-            }
-        });
         jScrollPane2.setViewportView(tbFilmography);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -465,14 +457,6 @@ public class ActorPanel extends javax.swing.JPanel {
         init();
     }//GEN-LAST:event_formComponentShown
 
-    private void tbFilmographyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFilmographyMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbFilmographyMouseClicked
-
-    private void tbFilmographyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbFilmographyKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbFilmographyKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DateOfBirthError;
@@ -501,6 +485,7 @@ public class ActorPanel extends javax.swing.JPanel {
             hideErrors();
             initRepository();
             initTable();
+            initTableFilmography();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Unrecoverable error", "Cannot initiate the form");
@@ -519,6 +504,7 @@ public class ActorPanel extends javax.swing.JPanel {
 
     private void initRepository() throws Exception {
         this.actorController = new ActorController();
+        this.madController = new  MovieActorDirectorController();
     }
 
     private void initTable() {
@@ -529,11 +515,13 @@ public class ActorPanel extends javax.swing.JPanel {
         tbActors.setModel(actorsTableModel);
 
         actorsTableModel.setColumnWidths(tbActors);
+    }
 
+    private void initTableFilmography() {
         tbFilmography.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tbFilmography.setAutoCreateRowSorter(true);
         tbFilmography.setRowHeight(25);
-        madTableModel = new MovieActorDirectorTableModel(actorController.selectAllMovieActorDirectors(), actorController);
+        madTableModel = new MovieActorDirectorTableModel(madController.selectAllMovieActorDirectors(), madController);
         tbFilmography.setModel(madTableModel);
     }
 
