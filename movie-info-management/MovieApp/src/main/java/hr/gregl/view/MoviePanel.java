@@ -6,16 +6,27 @@ package hr.gregl.view;
 
 import hr.gregl.controller.MovieController;
 import hr.gregl.model.Movie;
+import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
 import hr.gregl.view.model.MovieTableModel;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 import javax.swing.text.JTextComponent;
+import static javax.swing.text.html.HTML.Attribute.DIR;
 
 /**
  *
@@ -305,43 +316,41 @@ public class MoviePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbMoviesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMoviesMouseClicked
-        //showArticle();
+        showMovie();
     }//GEN-LAST:event_tbMoviesMouseClicked
 
     private void tbMoviesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbMoviesKeyReleased
-        //showArticle();
+        showMovie();
     }//GEN-LAST:event_tbMoviesKeyReleased
 
     private void btnChooseImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseImageActionPerformed
-        //File file = FileUtils.uploadFile("Images", "jpg", "jpeg", "png");
-        //if (file == null) {
-        //return;
-        //}
-        //tfPicturePath.setText(file.getAbsolutePath());
-        //setIcon(lbIcon, file);
+        File file = FileUtils.uploadFile("Images", "jpg", "jpeg", "png");
+        if (file == null) {
+        return;
+        }
+        tfPicturePath.setText(file.getAbsolutePath());
+        setIcon(lbIcon, file);
     }//GEN-LAST:event_btnChooseImageActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        //if (!formValid()) {
-        //   return;
-        //}
-        //try {
-        //   String localPicturePath = uploadPicture();
-        //   Article article = new Article(
-        //       tfTitle.getText().trim(),
-        //       tfLink.getText().trim(),
-        //       taDescription.getText().trim(),
-        //       localPicturePath,
-        //       LocalDateTime.parse(tfPublishedDate.getText().trim(), Article.DATE_FORMATTER)
-        //   );
-        //   repository.createArticle(article);
-        //   articlesTableModel.setArticles(repository.selectArticles());
-//
-        //    clearForm();
-        //} catch (Exception ex) {
-        //   Logger.getLogger(EditArticlesPanel.class.getName()).log(Level.SEVERE, null, ex);
-        //   MessageUtils.showErrorMessage("Error", "Unable to create article!");
-        //}
+        if (!formValid()) {
+            return;
+        }
+        try {
+            String localPicturePath = uploadPicture();
+            Movie movie = new Movie(
+                    tfTitle.getText().trim(),
+                    tfGenre.getText().trim(),
+                    Integer.parseInt(tfReleaseYear.getText().trim()),
+                    localPicturePath
+            );
+            movieController.createMovie(movie, new ArrayList<>(), new ArrayList<>());
+            moviesTableModel.setMovies(movieController.getAllMovies());
+            clearForm();
+        } catch (Exception ex) {
+            Logger.getLogger(MoviePanel.class.getName()).log(Level.SEVERE, null, ex);
+            MessageUtils.showErrorMessage("Error", "Unable to create movie!");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -446,7 +455,7 @@ public class MoviePanel extends javax.swing.JPanel {
         errorLabels.forEach(e -> e.setVisible(false));
     }
 
-    private void initRepository() throws Exception{
+    private void initRepository() throws Exception {
         this.movieController = new MovieController();
     }
 
@@ -455,7 +464,80 @@ public class MoviePanel extends javax.swing.JPanel {
         tbMovies.setAutoCreateRowSorter(true);
         tbMovies.setRowHeight(25);
         moviesTableModel = new MovieTableModel(movieController.getAllMovies());
-        tbMovies.setModel(moviesTableModel);    
+        tbMovies.setModel(moviesTableModel);
+    }
+
+    private String uploadPicture() throws IOException {
+        String picturePath = tfPicturePath.getText();
+        String ext = picturePath.substring(picturePath.lastIndexOf("."));
+        String pictureName = UUID.randomUUID() + ext;
+        String localPicturePath = DIR + File.separator + pictureName;
+
+        FileUtils.copy(picturePath, localPicturePath);
+        return localPicturePath;
+    }
+
+    private void clearForm() {
+        hideErrors();
+        tfTitle.setText("");
+        tfGenre.setText("");
+        tfReleaseYear.setText("");
+        tfPicturePath.setText("");
+        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png"))); // if you are using an image label
+    }
+
+    private boolean formValid() {
+        hideErrors();
+        boolean ok = true;
+
+        for (int i = 0; i < validationFields.size(); i++) {
+            ok &= !validationFields.get(i).getText().trim().isEmpty();
+            errorLabels.get(i).setVisible(validationFields.get(i).getText().trim().isEmpty());
+            if ("ReleaseYear".equals(validationFields.get(i).getName())) {
+                try {
+                    Integer.parseInt(validationFields.get(i).getText().trim());
+                } catch (Exception e) {
+                    ok = false;
+                    errorLabels.get(i).setVisible(true);
+                }
+            }
+        }
+        return ok;
+    }
+
+    private void showMovie() {
+        clearForm();
+        int selectedRow = tbMovies.getSelectedRow();
+        int rowIndex = tbMovies.convertRowIndexToModel(selectedRow);
+        int selectedMovieId = (int) moviesTableModel.getValueAt(rowIndex, 0);
+
+        try {
+            Movie movie = movieController.getMovieById(selectedMovieId);
+            fillForm(movie);
+        } catch (Exception ex) {
+            Logger.getLogger(MoviePanel.class.getName()).log(Level.SEVERE, null, ex);
+            MessageUtils.showErrorMessage("Error", "Unable to show movie!");
+        }
+    }
+
+    private void fillForm(Movie movie) {
+        if (movie.getImagePath() != null && Files.exists(Paths.get(movie.getImagePath()))) {
+            tfPicturePath.setText(movie.getImagePath());
+            setIcon(lbIcon, new File(movie.getImagePath()));
+        }
+        tfTitle.setText(movie.getTitle());
+        tfGenre.setText(movie.getGenre());
+        tfReleaseYear.setText(String.valueOf(movie.getReleaseYear()));
+    }
+
+    private void setIcon(JLabel label, File file) {
+        try {
+            BufferedImage image = ImageIO.read(file);
+            ImageIcon icon = new ImageIcon(image);
+            label.setIcon(icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
