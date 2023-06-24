@@ -17,9 +17,11 @@ public class MovieActorDirectorTableModel extends AbstractTableModel {
 
     private static final String[] COLUMN_NAMES = {"Movie", "Actor", "Director"};
 
+    private List<MovieActorDirector> mads;
     private ActorController actorController;
 
-    public MovieActorDirectorTableModel(ActorController actorController) {
+    public MovieActorDirectorTableModel(List<MovieActorDirector> mads, ActorController actorController) {
+        this.mads = mads;
         this.actorController = actorController;
     }
 
@@ -30,7 +32,7 @@ public class MovieActorDirectorTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return actorController.selectAllMovieActorDirectors().size();
+        return mads.size();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class MovieActorDirectorTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        MovieActorDirector mad = actorController.selectAllMovieActorDirectors().get(rowIndex);
+        MovieActorDirector mad = mads.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
@@ -55,7 +57,13 @@ public class MovieActorDirectorTableModel extends AbstractTableModel {
     }
 
     public MovieActorDirector getMovieActorDirectorAt(int rowIndex) {
-        return actorController.selectAllMovieActorDirectors().get(rowIndex);
+        return mads.get(rowIndex);
+    }
+
+    public void setMads(List<MovieActorDirector> mads) {
+        this.mads = mads;
+        fireTableDataChanged(); // Notifies the JTable that the model data has changed
     }
 }
+
 

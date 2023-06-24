@@ -533,7 +533,7 @@ public class ActorPanel extends javax.swing.JPanel {
         tbFilmography.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tbFilmography.setAutoCreateRowSorter(true);
         tbFilmography.setRowHeight(25);
-        madTableModel = new MovieActorDirectorTableModel(actorController);
+        madTableModel = new MovieActorDirectorTableModel(actorController.selectAllMovieActorDirectors(), actorController);
         tbFilmography.setModel(madTableModel);
     }
 
