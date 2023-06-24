@@ -215,6 +215,9 @@ CREATE PROCEDURE deleteActor
     @actorID INT
 AS
 BEGIN
+    DELETE FROM dbo.MovieActorDirector
+    WHERE ActorID = @actorID;
+
     DELETE FROM dbo.[Actor] 
     WHERE ActorID = @actorID;
 END;
@@ -284,6 +287,9 @@ CREATE PROCEDURE deleteDirector
     @directorID INT
 AS
 BEGIN
+    DELETE FROM dbo.MovieActorDirector
+    WHERE DirectorID = @directorID;
+
     DELETE FROM dbo.[Director] 
     WHERE DirectorID = @directorID;
 END;

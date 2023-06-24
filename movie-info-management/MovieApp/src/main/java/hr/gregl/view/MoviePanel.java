@@ -79,6 +79,7 @@ public class MoviePanel extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 680));
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 680));
@@ -115,9 +116,10 @@ public class MoviePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbMovies.setMinimumSize(new java.awt.Dimension(300, 300));
+        tbMovies.setMaximumSize(new java.awt.Dimension(2147483647, 10000));
+        tbMovies.setMinimumSize(new java.awt.Dimension(300, 400));
         tbMovies.setName(""); // NOI18N
-        tbMovies.setPreferredSize(new java.awt.Dimension(300, 300));
+        tbMovies.setPreferredSize(new java.awt.Dimension(300, 600));
         tbMovies.setRowMargin(1);
         tbMovies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,7 +139,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 996;
-        gridBagConstraints.ipady = 211;
+        gridBagConstraints.ipady = 600;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;

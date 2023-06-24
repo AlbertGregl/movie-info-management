@@ -1,0 +1,84 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package hr.gregl.view.model;
+
+import hr.gregl.model.Actor;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+
+/**
+ *
+ * @author albert
+ */
+public class ActorTableModel extends AbstractTableModel {
+
+    private static final String[] COLUMN_NAMES = {"Actor ID", "Name", "Date Of Birth", "Image Path"};
+    private static final int[] COLUMN_WIDTHS = {30, 150, 100, 200};
+
+    private List<Actor> actors;
+
+    public ActorTableModel(List<Actor> actors) {
+        this.actors = actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+        fireTableDataChanged();
+    }
+
+    @Override
+    public int getRowCount() {
+        return actors.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return COLUMN_NAMES.length;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Actor actor = actors.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return actor.getActorID();
+            case 1:
+                return actor.getName();
+            case 2:
+                return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(actor.getDob());
+            case 3:
+                return actor.getImagePath();
+            default:
+                throw new RuntimeException("No such column");
+        }
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        return COLUMN_NAMES[column];
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        if (columnIndex == 0) {
+            return Integer.class;
+        } else if (columnIndex == 2) {
+            return LocalDate.class;
+        }
+        return super.getColumnClass(columnIndex);
+    }
+
+    public void setColumnWidths(JTable table) {
+        TableColumn column;
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth(COLUMN_WIDTHS[i]);
+        }
+    }
+}

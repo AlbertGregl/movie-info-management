@@ -51,7 +51,7 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
-        tfPassword = new javax.swing.JTextField();
+        tfPassword = new javax.swing.JPasswordField();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -102,8 +102,9 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.ipadx = 11;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(jLabel4, gridBagConstraints);
 
         btnRegister.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -116,9 +117,9 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(btnRegister, gridBagConstraints);
 
         btnLogin.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -133,13 +134,12 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(btnLogin, gridBagConstraints);
 
         tfPassword.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tfPassword.setMinimumSize(new java.awt.Dimension(120, 22));
-        tfPassword.setName(""); // NOI18N
         tfPassword.setPreferredSize(new java.awt.Dimension(120, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -184,7 +184,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblSuccess;
-    private javax.swing.JTextField tfPassword;
+    private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }
