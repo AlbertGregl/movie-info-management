@@ -101,6 +101,9 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 6, 0, 0);
         add(lbPicturePathError, gridBagConstraints);
 
+        jScrollPane1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+
+        tbMovies.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tbMovies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -112,6 +115,10 @@ public class MoviePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbMovies.setMinimumSize(new java.awt.Dimension(300, 300));
+        tbMovies.setName(""); // NOI18N
+        tbMovies.setPreferredSize(new java.awt.Dimension(300, 300));
+        tbMovies.setRowMargin(1);
         tbMovies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbMoviesMouseClicked(evt);
@@ -126,7 +133,7 @@ public class MoviePanel extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 15;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.gridwidth = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 996;
@@ -144,10 +151,10 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 13;
         gridBagConstraints.ipady = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         add(lbIcon, gridBagConstraints);
 
+        jLabel8.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         jLabel8.setText("Release Year (yyyy)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -159,6 +166,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(27, 18, 0, 0);
         add(jLabel8, gridBagConstraints);
 
+        jLabel2.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         jLabel2.setText("Title");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -169,6 +177,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(8, 15, 0, 0);
         add(jLabel2, gridBagConstraints);
 
+        tfReleaseYear.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tfReleaseYear.setName("Date"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -178,6 +187,8 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 18, 0, 0);
         add(tfReleaseYear, gridBagConstraints);
+
+        tfTitle.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -212,14 +223,17 @@ public class MoviePanel extends javax.swing.JPanel {
         add(lbTitleError, gridBagConstraints);
 
         tfPicturePath.setEditable(false);
+        tfPicturePath.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        tfPicturePath.setPreferredSize(new java.awt.Dimension(40, 21));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.ipadx = 346;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
         add(tfPicturePath, gridBagConstraints);
 
+        jLabel4.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         jLabel4.setText("Genre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -231,6 +245,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(26, 18, 0, 0);
         add(jLabel4, gridBagConstraints);
 
+        btnChooseImage.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnChooseImage.setText("Choose Image");
         btnChooseImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,11 +254,13 @@ public class MoviePanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         gridBagConstraints.insets = new java.awt.Insets(6, 18, 0, 0);
         add(btnChooseImage, gridBagConstraints);
+
+        tfGenre.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -253,6 +270,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 18, 0, 0);
         add(tfGenre, gridBagConstraints);
 
+        btnAdd.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +299,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 12, 0, 0);
         add(lbGenreError, gridBagConstraints);
 
+        btnUpdate.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,6 +316,7 @@ public class MoviePanel extends javax.swing.JPanel {
         add(btnUpdate, gridBagConstraints);
 
         btnDelete.setBackground(new java.awt.Color(204, 0, 51));
+        btnDelete.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -326,7 +346,7 @@ public class MoviePanel extends javax.swing.JPanel {
     private void btnChooseImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseImageActionPerformed
         File file = FileUtils.uploadFile("Images", "jpg", "jpeg", "png");
         if (file == null) {
-        return;
+            return;
         }
         tfPicturePath.setText(file.getAbsolutePath());
         setIcon(lbIcon, file);
@@ -354,34 +374,33 @@ public class MoviePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        //if (selectedArticle == null) {
-        //     MessageUtils.showInformationMessage("Wrong operation", "Please choose article to update");
-        //     return;
-        // }
-        // if (!formValid()) {
-        //     return;
-        //  }
-        //  try {
-        //     if (!tfPicturePath.getText().trim().equals(selectedArticle.getPicturePath())) {
-        //        if (selectedArticle.getPicturePath() != null) {
-        //            Files.deleteIfExists(Paths.get(selectedArticle.getPicturePath()));
-        //       }
-        //       String localPicturePath = uploadPicture();
-        //       selectedArticle.setPicturePath(localPicturePath);
-        //   }
-//
-        //   selectedArticle.setTitle(tfTitle.getText().trim());
-        //    selectedArticle.setLink(tfLink.getText().trim());
-        //    selectedArticle.setDescription(taDescription.getText().trim());
-        //   selectedArticle.setPublishedDate(LocalDateTime.parse(tfPublishedDate.getText().trim(), Article.DATE_FORMATTER));
+        if (selectedMovie == null) {
+            MessageUtils.showInformationMessage("Wrong operation", "Please choose a movie to update");
+            return;
+        }
+        if (!formValid()) {
+            return;
+        }
+        try {
+            if (!tfPicturePath.getText().trim().equals(selectedMovie.getImagePath())) {
+                if (selectedMovie.getImagePath() != null) {
+                    Files.deleteIfExists(Paths.get(selectedMovie.getImagePath()));
+                }
+                String localPicturePath = uploadPicture();
+                selectedMovie.setImagePath(localPicturePath);
+            }
 
-        //  repository.updateArticle(selectedArticle.getId(), selectedArticle);
-        //  articlesTableModel.setArticles(repository.selectArticles());
-        //   clearForm();
-        //} catch (Exception ex) {
-        //    Logger.getLogger(EditArticlesPanel.class.getName()).log(Level.SEVERE, null, ex);
-        //    MessageUtils.showErrorMessage("Error", "Unable to update article!");
-        //}
+            selectedMovie.setTitle(tfTitle.getText().trim());
+            selectedMovie.setGenre(tfGenre.getText().trim());
+            selectedMovie.setReleaseYear(Integer.parseInt(tfReleaseYear.getText().trim()));
+            
+            movieController.updateMovie(selectedMovie);
+            moviesTableModel.setMovies(movieController.getAllMovies());
+            clearForm();
+        } catch (Exception ex) {
+            Logger.getLogger(MoviePanel.class.getName()).log(Level.SEVERE, null, ex);
+            MessageUtils.showErrorMessage("Error", "Unable to update movie!");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -465,6 +484,8 @@ public class MoviePanel extends javax.swing.JPanel {
         tbMovies.setRowHeight(25);
         moviesTableModel = new MovieTableModel(movieController.getAllMovies());
         tbMovies.setModel(moviesTableModel);
+        
+        moviesTableModel.setColumnWidths(tbMovies);
     }
 
     private String uploadPicture() throws IOException {
@@ -483,7 +504,7 @@ public class MoviePanel extends javax.swing.JPanel {
         tfGenre.setText("");
         tfReleaseYear.setText("");
         tfPicturePath.setText("");
-        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png"))); // if you are using an image label
+        lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png")));
     }
 
     private boolean formValid() {
@@ -513,6 +534,7 @@ public class MoviePanel extends javax.swing.JPanel {
 
         try {
             Movie movie = movieController.getMovieById(selectedMovieId);
+            selectedMovie = movie; // it would be better to use Optional...
             fillForm(movie);
         } catch (Exception ex) {
             Logger.getLogger(MoviePanel.class.getName()).log(Level.SEVERE, null, ex);

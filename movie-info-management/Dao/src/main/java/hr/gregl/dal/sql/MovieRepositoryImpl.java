@@ -28,7 +28,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     private static final String ADD_MOVIE = "{ CALL addMovie (?,?,?,?) }";
     private static final String DELETE_MOVIE = "{ CALL deleteMovie (?) }";
-    private static final String UPDATE_MOVIE = "{ CALL updateMovie (?,?,?,?) }";
+    private static final String UPDATE_MOVIE = "{ CALL updateMovie (?,?,?,?,?) }";
     private static final String SELECT_MOVIE = "{ CALL selectMovie (?) }";
     private static final String SELECT_ALL_MOVIES = "{ CALL selectAllMovies }";
 

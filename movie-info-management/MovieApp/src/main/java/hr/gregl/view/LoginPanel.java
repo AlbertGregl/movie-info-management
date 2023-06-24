@@ -55,6 +55,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.GridBagLayout());
 
+        jLabel1.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         jLabel1.setText("Username: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipadx = 5;
@@ -62,6 +63,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(jLabel1, gridBagConstraints);
 
+        tfUsername.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tfUsername.setMinimumSize(new java.awt.Dimension(120, 22));
         tfUsername.setName(""); // NOI18N
         tfUsername.setPreferredSize(new java.awt.Dimension(120, 22));
@@ -73,6 +75,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         add(tfUsername, gridBagConstraints);
 
+        jLabel2.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         jLabel2.setText("Password: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -82,6 +85,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(jLabel2, gridBagConstraints);
 
+        lblSuccess.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         lblSuccess.setForeground(new java.awt.Color(204, 0, 0));
         lblSuccess.setText("wrong username or password!");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -92,6 +96,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 5;
         add(lblSuccess, gridBagConstraints);
 
+        jLabel4.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         jLabel4.setText("New user? Register -> ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -101,6 +106,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 5;
         add(jLabel4, gridBagConstraints);
 
+        btnRegister.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +121,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         add(btnRegister, gridBagConstraints);
 
+        btnLogin.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +137,7 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(btnLogin, gridBagConstraints);
 
+        tfPassword.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tfPassword.setMinimumSize(new java.awt.Dimension(120, 22));
         tfPassword.setName(""); // NOI18N
         tfPassword.setPreferredSize(new java.awt.Dimension(120, 22));

@@ -56,10 +56,13 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
         setSize(new java.awt.Dimension(1024, 720));
         getContentPane().setLayout(new java.awt.CardLayout());
 
+        tpContent.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tpContent.setMaximumSize(new java.awt.Dimension(1920, 1080));
         tpContent.setMinimumSize(new java.awt.Dimension(800, 600));
         tpContent.setName(""); // NOI18N
         getContentPane().add(tpContent, "card2");
+
+        menuMain.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
 
         menuUser.setText("Username");
         menuUser.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N

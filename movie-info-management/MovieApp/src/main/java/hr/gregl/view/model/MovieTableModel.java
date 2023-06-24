@@ -6,7 +6,9 @@ package hr.gregl.view.model;
 
 import hr.gregl.model.Movie;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -15,6 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class MovieTableModel extends AbstractTableModel {
 
     private static final String[] COLUMN_NAMES = {"Movie ID", "Title", "Genre", "Release Year", "Image Path"};
+    private static final int[] COLUMN_WIDTHS = {30, 150, 100, 30, 200};
 
     private List<Movie> movies;
 
@@ -60,12 +63,20 @@ public class MovieTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         return COLUMN_NAMES[column];
     }
-    
+
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         if (columnIndex == 0 || columnIndex == 3) {
             return Integer.class;
         }
-        return super.getColumnClass(columnIndex); 
+        return super.getColumnClass(columnIndex);
+    }
+
+    public void setColumnWidths(JTable table) {
+        TableColumn column;
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth(COLUMN_WIDTHS[i]);
+        }
     }
 }

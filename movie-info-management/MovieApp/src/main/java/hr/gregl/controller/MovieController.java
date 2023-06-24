@@ -46,6 +46,7 @@ public class MovieController {
         this.movieRepository.update(movie);
     }
 
+    // better idea would be "public Optional<Movie> getMovieById(int id)"
     public Movie getMovieById(int movieId) {
         return this.movieRepository.selectById(movieId);
     }
