@@ -9,6 +9,7 @@ import hr.gregl.model.Actor;
 import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
 import hr.gregl.view.model.ActorTableModel;
+import hr.gregl.view.model.MovieActorDirectorTableModel;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class ActorPanel extends javax.swing.JPanel {
     private List<JLabel> errorLabels;
 
     private ActorTableModel actorsTableModel;
+    private MovieActorDirectorTableModel madTableModel;
 
     private Actor selectedActor;
 
@@ -527,6 +529,12 @@ public class ActorPanel extends javax.swing.JPanel {
         tbActors.setModel(actorsTableModel);
 
         actorsTableModel.setColumnWidths(tbActors);
+
+        tbFilmography.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tbFilmography.setAutoCreateRowSorter(true);
+        tbFilmography.setRowHeight(25);
+        madTableModel = new MovieActorDirectorTableModel(actorController);
+        tbFilmography.setModel(madTableModel);
     }
 
     private String uploadPicture() throws IOException {
