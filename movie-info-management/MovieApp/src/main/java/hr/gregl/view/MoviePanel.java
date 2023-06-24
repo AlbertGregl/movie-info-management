@@ -393,7 +393,7 @@ public class MoviePanel extends javax.swing.JPanel {
             selectedMovie.setTitle(tfTitle.getText().trim());
             selectedMovie.setGenre(tfGenre.getText().trim());
             selectedMovie.setReleaseYear(Integer.parseInt(tfReleaseYear.getText().trim()));
-            
+
             movieController.updateMovie(selectedMovie);
             moviesTableModel.setMovies(movieController.getAllMovies());
             clearForm();
@@ -404,26 +404,25 @@ public class MoviePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        //if (selectedArticle == null) {
-        //     MessageUtils.showInformationMessage("Wrong operation", "Please choose article to delete");
-        //     return;
-        //}
-        //if (MessageUtils.showConfirmDialog(
-        //   "Delete article",
-        //    "Do you really want to delete article?")) {
-        //try {
-        //    if (selectedArticle.getPicturePath() != null) {
-        //        Files.deleteIfExists(Paths.get(selectedArticle.getPicturePath()));
-        //    }
-        //    repository.deleteArticle(selectedArticle.getId());
-        //   articlesTableModel.setArticles(repository.selectArticles());
-
-        //    clearForm();
-        // } catch (Exception ex) {
-        //    Logger.getLogger(EditArticlesPanel.class.getName()).log(Level.SEVERE, null, ex);
-        //    MessageUtils.showErrorMessage("Error", "Unable to delete article!");
-        // }
-        //}
+        if (selectedMovie == null) {
+            MessageUtils.showInformationMessage("Wrong operation", "Please choose a movie to delete");
+            return;
+        }
+        if (MessageUtils.showConfirmDialog(
+                "Delete movie",
+                "Do you really want to delete movie?")) {
+            try {
+                if (selectedMovie.getImagePath() != null) {
+                    Files.deleteIfExists(Paths.get(selectedMovie.getImagePath()));
+                }
+                movieController.deleteMovie(selectedMovie.getMovieID());
+                moviesTableModel.setMovies(movieController.getAllMovies());
+                clearForm();
+            } catch (Exception ex) {
+                Logger.getLogger(MoviePanel.class.getName()).log(Level.SEVERE, null, ex);
+                MessageUtils.showErrorMessage("Error", "Unable to delete movie!");
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
@@ -484,7 +483,7 @@ public class MoviePanel extends javax.swing.JPanel {
         tbMovies.setRowHeight(25);
         moviesTableModel = new MovieTableModel(movieController.getAllMovies());
         tbMovies.setModel(moviesTableModel);
-        
+
         moviesTableModel.setColumnWidths(tbMovies);
     }
 

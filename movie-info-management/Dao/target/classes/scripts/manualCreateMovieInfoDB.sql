@@ -141,6 +141,9 @@ CREATE PROCEDURE deleteMovie
     @movieID INT
 AS
 BEGIN
+    DELETE FROM dbo.MovieActorDirector
+    WHERE MovieID = @movieID;
+
     DELETE FROM dbo.[Movie] 
     WHERE MovieID = @movieID;
 END;
