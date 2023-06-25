@@ -11,7 +11,7 @@ import hr.gregl.controller.AdminController;
  * @author albert
  */
 public class AdminPanel extends javax.swing.JPanel {
-    
+
     private AdminController adminController;
 
     /**
@@ -31,30 +31,43 @@ public class AdminPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        btnLoadRssData = new javax.swing.JButton();
 
-        jLabel1.setText("ADMINISTRATOR");
+        setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        setMaximumSize(new java.awt.Dimension(1024, 680));
+        setMinimumSize(new java.awt.Dimension(1024, 680));
+
+        btnLoadRssData.setText("Load RSS Data");
+        btnLoadRssData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadRssDataActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(347, 347, 347)
-                .addComponent(jLabel1)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGap(435, 435, 435)
+                .addComponent(btnLoadRssData, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(462, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(263, 263, 263)
-                .addComponent(jLabel1)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addGap(126, 126, 126)
+                .addComponent(btnLoadRssData, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(518, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLoadRssDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadRssDataActionPerformed
+        adminController.parseAndSaveDataFromRSS();
+    }//GEN-LAST:event_btnLoadRssDataActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnLoadRssData;
     // End of variables declaration//GEN-END:variables
 }

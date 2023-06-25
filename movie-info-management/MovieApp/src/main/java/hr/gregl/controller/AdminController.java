@@ -7,8 +7,11 @@ package hr.gregl.controller;
 import hr.gregl.dal.RepositoryFactory;
 import hr.gregl.dal.UserRepository;
 import hr.gregl.model.User;
+import hr.gregl.parsers.rss.MovieParser;
 import hr.gregl.service.DatabaseService;
+import java.io.IOException;
 import java.util.List;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -51,7 +54,12 @@ public class AdminController {
     }
 
     // Operation for parsing and saving data from an RSS feed
-    public void parseAndSaveDataFromRSS(String url) {
-        // TODO
+    public void parseAndSaveDataFromRSS() {
+        MovieParser movieParser = new MovieParser();
+        try {
+            movieParser.parseAndSaveDataFromRSS();
+        } catch (IOException | JAXBException ex) {
+            ex.printStackTrace();
+        }
     }
 }
