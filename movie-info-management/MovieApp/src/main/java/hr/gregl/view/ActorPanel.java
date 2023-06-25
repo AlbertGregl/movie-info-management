@@ -427,6 +427,11 @@ public class ActorPanel extends javax.swing.JPanel {
         add(jLabel1, gridBagConstraints);
 
         btnAddMAD.setText("Add Filmography");
+        btnAddMAD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMADActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 23;
@@ -520,7 +525,7 @@ public class ActorPanel extends javax.swing.JPanel {
                 }
                 actorController.deleteActor(selectedActor.getActorID());
                 actorsTableModel.setActors(actorController.getAllActors());
-                madTableModel.setMads(madController.selectAllMovieActorDirectors());
+                refreshMadTableData();
                 clearForm();
             } catch (Exception ex) {
                 Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -532,6 +537,21 @@ public class ActorPanel extends javax.swing.JPanel {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         init();
     }//GEN-LAST:event_formComponentShown
+
+    private void btnAddMADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMADActionPerformed
+        // Check if the form data is valid
+        if (!madDataValid()) {
+            return;
+        }
+        try {
+            // Save the movieActorDirector model to the database
+            madController.addMovieActorDirector(movieActorDirector);
+            refreshMadTableData();
+        } catch (Exception ex) {
+            Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
+            MessageUtils.showErrorMessage("Error", "Unable to add movie/actor/director relation!");
+        }
+    }//GEN-LAST:event_btnAddMADActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -567,8 +587,8 @@ public class ActorPanel extends javax.swing.JPanel {
             initRepository();
             initTable();
             initTableFilmography();
-            initDragNDrop();
             initComboBoxLists();
+            initDragNDrop();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Unrecoverable error", "Cannot initiate the form");
@@ -683,7 +703,7 @@ public class ActorPanel extends javax.swing.JPanel {
 
         // set movieActorDirector to the first actor/movie from the list
         Director firstDirector = allDirectors.get(0);
-        movieActorDirector.setActorID(firstDirector.getDirectorID());
+        movieActorDirector.setDirectorID(firstDirector.getDirectorID());
         Movie firstMovie = allMovies.get(0);
         movieActorDirector.setMovieID(firstMovie.getMovieID());
 
@@ -692,8 +712,8 @@ public class ActorPanel extends javax.swing.JPanel {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    Actor selectedActor = (Actor) e.getItem();
-                    movieActorDirector.setActorID(selectedActor.getActorID());
+                    Director selectedDirector = (Director) e.getItem();
+                    movieActorDirector.setDirectorID(selectedDirector.getDirectorID());
                 }
             }
         });
@@ -716,6 +736,19 @@ public class ActorPanel extends javax.swing.JPanel {
 
     private void fillMoviesComboBox() {
         allMovies.forEach(a -> cbMovies.addItem(a));
+    }
+
+    private boolean madDataValid() {
+        return !tfActor.getText().trim().isEmpty() && movieActorDirector.getActorID() != 0;
+    }
+
+    private void refreshMadTableData() {
+        madTableModel.setMads(madController.selectAllMovieActorDirectors());
+    }
+
+    private void clearMadData() {
+        tfActor.setText("");
+        movieActorDirector.setActorID(0);
     }
 
     // drag and drop

@@ -430,6 +430,11 @@ public class DirectorPanel extends javax.swing.JPanel {
         add(jLabel1, gridBagConstraints);
 
         btnAddMAD.setText("Add Filmography");
+        btnAddMAD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMADActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 23;
@@ -536,6 +541,22 @@ public class DirectorPanel extends javax.swing.JPanel {
         init();
     }//GEN-LAST:event_formComponentShown1
 
+    private void btnAddMADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMADActionPerformed
+        // Check if the form data is valid
+        if (!madDataValid()) {
+            return;
+        }
+        try {
+            // Save the movieActorDirector model to the database
+            madController.addMovieActorDirector(movieActorDirector);
+            refreshMadTableData();
+            clearMadData();
+        } catch (Exception ex) {
+            Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
+            MessageUtils.showErrorMessage("Error", "Unable to add movie/actor/director relation!");
+        }
+    }//GEN-LAST:event_btnAddMADActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DateOfBirthError;
@@ -570,8 +591,8 @@ public class DirectorPanel extends javax.swing.JPanel {
             initRepository();
             initTable();
             initTableFilmography();
-            initDragNDrop();
             initComboBoxLists();
+            initDragNDrop();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Unrecoverable error", "Cannot initiate the form");
@@ -686,10 +707,10 @@ public class DirectorPanel extends javax.swing.JPanel {
 
         // set movieActorDirector to the first actor/movie from the list
         Actor firstActor = allActors.get(0);
-        movieActorDirector.setActorID(firstActor.getActorID());        
+        movieActorDirector.setActorID(firstActor.getActorID());
         Movie firstMovie = allMovies.get(0);
         movieActorDirector.setMovieID(firstMovie.getMovieID());
-        
+
         // add Listeners
         cbActors.addItemListener(new ItemListener() {
             @Override
@@ -719,6 +740,19 @@ public class DirectorPanel extends javax.swing.JPanel {
 
     private void fillMoviesComboBox() {
         allMovies.forEach(a -> cbMovies.addItem(a));
+    }
+
+    private boolean madDataValid() {
+        return !tfDirector.getText().trim().isEmpty() && movieActorDirector.getActorID() != 0;
+    }
+
+    private void refreshMadTableData() {
+        madTableModel.setMads(madController.selectAllMovieActorDirectors());
+    }
+
+    private void clearMadData() {
+        tfDirector.setText("");
+        movieActorDirector.setDirectorID(0);
     }
 
     // drag and drop
