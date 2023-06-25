@@ -73,6 +73,6 @@ public final class Movie {
 
     @Override
     public String toString() {
-        return movieId + " - " + title + " - " + genre + " - " + releaseYear;
+        return this.title;
     }
 }

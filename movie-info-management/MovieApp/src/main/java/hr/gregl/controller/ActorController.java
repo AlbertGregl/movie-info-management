@@ -41,5 +41,6 @@ public class ActorController {
     public Actor getActorById(int actorId) {
         return this.actorRepository.selectById(actorId);
     }
+    
 
 }

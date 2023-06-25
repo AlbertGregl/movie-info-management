@@ -53,4 +53,16 @@ public class MovieActorDirectorController {
         this.movieActorDirectorRepository.add(mad);
     }
 
+    public List<Director> getAllDirectors() {
+        return this.directorRepository.selectAll();
+    }
+
+    public List<Actor> getAllActors() {
+        return this.actorRepository.selectAll();
+    }
+
+    public List<Movie> getAllMovies() {
+        return this.movieRepository.selectAll();
+    }
+
 }

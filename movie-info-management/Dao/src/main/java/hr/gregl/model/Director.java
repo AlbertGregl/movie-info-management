@@ -65,6 +65,6 @@ public final class Director {
 
     @Override
     public String toString() {
-        return directorId + " - " + name + " - " + dob.toString();
+        return this.name;
     }
 }

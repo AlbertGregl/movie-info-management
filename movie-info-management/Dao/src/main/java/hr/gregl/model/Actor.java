@@ -65,6 +65,6 @@ public final class Actor {
 
     @Override
     public String toString() {
-        return actorID + " - " + name + " - " + dob.toString();
+        return this.name;
     }
 }

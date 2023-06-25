@@ -7,6 +7,8 @@ package hr.gregl.view;
 import hr.gregl.controller.ActorController;
 import hr.gregl.controller.MovieActorDirectorController;
 import hr.gregl.model.Actor;
+import hr.gregl.model.Director;
+import hr.gregl.model.Movie;
 import hr.gregl.model.MovieActorDirector;
 import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
@@ -15,6 +17,8 @@ import hr.gregl.view.model.MovieActorDirectorTableModel;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +59,9 @@ public class ActorPanel extends javax.swing.JPanel {
 
     private Actor selectedActor;
     private MovieActorDirector movieActorDirector;
+
+    private List<Director> allDirectors;
+    private List<Movie> allMovies;
 
     /**
      * Creates new form ActorPanel
@@ -158,7 +165,7 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 560;
+        gridBagConstraints.ipadx = 537;
         gridBagConstraints.ipady = 334;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
@@ -172,6 +179,7 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 10;
+        gridBagConstraints.ipadx = -23;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 28, 0, 0);
@@ -353,15 +361,15 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 404;
-        gridBagConstraints.ipady = 406;
+        gridBagConstraints.ipadx = 428;
+        gridBagConstraints.ipady = 422;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 16);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 15);
         add(jScrollPane2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -375,35 +383,38 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
         add(jLabel3, gridBagConstraints);
+
+        tfActor.setMaximumSize(new java.awt.Dimension(156, 48));
+        tfActor.setMinimumSize(new java.awt.Dimension(156, 48));
+        tfActor.setPreferredSize(new java.awt.Dimension(156, 48));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 21;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 84;
-        gridBagConstraints.ipady = 26;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 0);
         add(tfActor, gridBagConstraints);
 
-        cbMovies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMovies.setMaximumSize(new java.awt.Dimension(134, 32));
+        cbMovies.setMinimumSize(new java.awt.Dimension(134, 32));
+        cbMovies.setPreferredSize(new java.awt.Dimension(134, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 21;
-        gridBagConstraints.ipadx = 62;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(26, 6, 0, 0);
         add(cbMovies, gridBagConstraints);
 
-        cbDirectors.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDirectors.setMaximumSize(new java.awt.Dimension(134, 32));
+        cbDirectors.setMinimumSize(new java.awt.Dimension(134, 32));
+        cbDirectors.setPreferredSize(new java.awt.Dimension(134, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 15;
         gridBagConstraints.gridy = 21;
-        gridBagConstraints.ipadx = 54;
-        gridBagConstraints.ipady = 10;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(26, 6, 0, 16);
+        gridBagConstraints.insets = new java.awt.Insets(26, 6, 0, 0);
         add(cbDirectors, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
@@ -412,18 +423,18 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 382;
         gridBagConstraints.ipady = 73;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 16);
+        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 0);
         add(jLabel1, gridBagConstraints);
 
         btnAddMAD.setText("Add Filmography");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 23;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 345;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.ipadx = 322;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 16);
+        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 15);
         add(btnAddMAD, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -509,6 +520,7 @@ public class ActorPanel extends javax.swing.JPanel {
                 }
                 actorController.deleteActor(selectedActor.getActorID());
                 actorsTableModel.setActors(actorController.getAllActors());
+                madTableModel.setMads(madController.selectAllMovieActorDirectors());
                 clearForm();
             } catch (Exception ex) {
                 Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -529,8 +541,8 @@ public class ActorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnChooseImage;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cbDirectors;
-    private javax.swing.JComboBox<String> cbMovies;
+    private javax.swing.JComboBox<Director> cbDirectors;
+    private javax.swing.JComboBox<Movie> cbMovies;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -556,6 +568,7 @@ public class ActorPanel extends javax.swing.JPanel {
             initTable();
             initTableFilmography();
             initDragNDrop();
+            initComboBoxLists();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Unrecoverable error", "Cannot initiate the form");
@@ -658,6 +671,51 @@ public class ActorPanel extends javax.swing.JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Filmography
+    private void initComboBoxLists() {
+        movieActorDirector = new MovieActorDirector();
+        allDirectors = madController.getAllDirectors();
+        allMovies = madController.getAllMovies();
+        fillDirectorsComboBox();
+        fillMoviesComboBox();
+
+        // set movieActorDirector to the first actor/movie from the list
+        Director firstDirector = allDirectors.get(0);
+        movieActorDirector.setActorID(firstDirector.getDirectorID());
+        Movie firstMovie = allMovies.get(0);
+        movieActorDirector.setMovieID(firstMovie.getMovieID());
+
+        // add Listeners
+        cbDirectors.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Actor selectedActor = (Actor) e.getItem();
+                    movieActorDirector.setActorID(selectedActor.getActorID());
+                }
+            }
+        });
+
+        cbMovies.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Movie selectedMovie = (Movie) e.getItem();
+                    movieActorDirector.setMovieID(selectedMovie.getMovieID());
+                }
+            }
+        });
+
+    }
+
+    private void fillDirectorsComboBox() {
+        allDirectors.forEach(a -> cbDirectors.addItem(a));
+    }
+
+    private void fillMoviesComboBox() {
+        allMovies.forEach(a -> cbMovies.addItem(a));
     }
 
     // drag and drop
