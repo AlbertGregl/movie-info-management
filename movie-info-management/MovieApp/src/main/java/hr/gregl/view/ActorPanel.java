@@ -547,6 +547,7 @@ public class ActorPanel extends javax.swing.JPanel {
             // Save the movieActorDirector model to the database
             madController.addMovieActorDirector(movieActorDirector);
             refreshMadTableData();
+            clearMadData();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Error", "Unable to add movie/actor/director relation!");
