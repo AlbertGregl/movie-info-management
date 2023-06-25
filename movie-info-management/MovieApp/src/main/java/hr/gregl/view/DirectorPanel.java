@@ -7,10 +7,14 @@ package hr.gregl.view;
 import hr.gregl.controller.DirectorController;
 import hr.gregl.controller.MovieActorDirectorController;
 import hr.gregl.model.Director;
+import hr.gregl.model.MovieActorDirector;
 import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
 import hr.gregl.view.model.DirectorTableModel;
 import hr.gregl.view.model.MovieActorDirectorTableModel;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +29,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.TransferHandler;
+import static javax.swing.TransferHandler.COPY;
 import javax.swing.text.JTextComponent;
 import static javax.swing.text.html.HTML.Attribute.DIR;
 
@@ -46,6 +54,7 @@ public class DirectorPanel extends javax.swing.JPanel {
     private MovieActorDirectorTableModel madTableModel;
 
     private Director selectedDirector;
+    private MovieActorDirector movieActorDirector;
 
     /**
      * Creates new form DirectorPanel
@@ -82,6 +91,11 @@ public class DirectorPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbFilmography = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        tfDirector = new javax.swing.JTextField();
+        cbMovies = new javax.swing.JComboBox<>();
+        cbActors = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        btnAddMAD = new javax.swing.JButton();
 
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 680));
@@ -142,6 +156,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridheight = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 560;
         gridBagConstraints.ipady = 334;
@@ -179,6 +194,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 61;
         gridBagConstraints.ipady = 9;
@@ -269,7 +285,6 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 78;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -338,15 +353,15 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 404;
-        gridBagConstraints.ipady = 623;
+        gridBagConstraints.ipady = 400;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 3, 11);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 11);
         add(jScrollPane2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -354,11 +369,62 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 161;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 10, 0, 0);
         add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 15;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 84;
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 11);
+        add(tfDirector, gridBagConstraints);
+
+        cbMovies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.ipadx = 62;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(28, 6, 0, 0);
+        add(cbMovies, gridBagConstraints);
+
+        cbActors.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(28, 6, 0, 0);
+        add(cbActors, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 24;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 382;
+        gridBagConstraints.ipady = 83;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 6, 3, 11);
+        add(jLabel1, gridBagConstraints);
+
+        btnAddMAD.setText("Add Filmography");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 23;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 345;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 11);
+        add(btnAddMAD, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDirectorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDirectorsMouseClicked
@@ -459,9 +525,13 @@ public class DirectorPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DateOfBirthError;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddMAD;
     private javax.swing.JButton btnChooseImage;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cbActors;
+    private javax.swing.JComboBox<String> cbMovies;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
@@ -473,6 +543,7 @@ public class DirectorPanel extends javax.swing.JPanel {
     private javax.swing.JTable tbDirectors;
     private javax.swing.JTable tbFilmography;
     private javax.swing.JTextField tfDateOfBirth;
+    private javax.swing.JTextField tfDirector;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPicturePath;
     // End of variables declaration//GEN-END:variables
@@ -484,6 +555,7 @@ public class DirectorPanel extends javax.swing.JPanel {
             initRepository();
             initTable();
             initTableFilmography();
+            initDragNDrop();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Unrecoverable error", "Cannot initiate the form");
@@ -538,6 +610,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         tfName.setText("");
         tfDateOfBirth.setText("");
         tfPicturePath.setText("");
+        tfDirector.setText("");
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png")));
     }
 
@@ -584,6 +657,88 @@ public class DirectorPanel extends javax.swing.JPanel {
             label.setIcon(icon);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    // drag and drop
+    private void initDragNDrop() {
+        tbDirectors.setDragEnabled(true);
+        tbDirectors.setTransferHandler(new DirectorExportTransferHandler());
+
+        tfDirector.setTransferHandler(new DirectorImportTransferHandler());
+    }
+
+    private class DirectorExportTransferHandler extends TransferHandler {
+
+        @Override
+        public int getSourceActions(JComponent c) {
+            return COPY;
+        }
+
+        @Override
+        public Transferable createTransferable(JComponent c) {
+            JTable table = (JTable) c;
+            int selectedRow = table.getSelectedRow();
+            int rowIndex = table.convertRowIndexToModel(selectedRow);
+            int selectedDirectorId = (int) directorTableModel.getValueAt(rowIndex, 0);
+
+            try {
+                Director selectedDirector = directorController.getDirectorById(selectedDirectorId);
+                return new DirectorTransferable(selectedDirector);
+            } catch (Exception ex) {
+                Logger.getLogger(DirectorPanel.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        }
+    }
+
+    private class DirectorImportTransferHandler extends TransferHandler {
+
+        @Override
+        public boolean canImport(TransferHandler.TransferSupport support) {
+            return support.isDataFlavorSupported(DirectorTransferable.directorFlavor);
+        }
+
+        @Override
+        public boolean importData(TransferHandler.TransferSupport support) {
+            Transferable transferable = support.getTransferable();
+            try {
+                Director director = (Director) transferable.getTransferData(DirectorTransferable.directorFlavor);
+                tfDirector.setText(director.getName());
+                movieActorDirector.setDirectorID(director.getDirectorID());
+                return true;
+            } catch (UnsupportedFlavorException | IOException ex) {
+                Logger.getLogger(DirectorPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+    }
+
+    public class DirectorTransferable implements Transferable {
+
+        public static final DataFlavor directorFlavor = new DataFlavor(Director.class, "java/Director");
+        private Director director;
+
+        public DirectorTransferable(Director director) {
+            this.director = director;
+        }
+
+        @Override
+        public DataFlavor[] getTransferDataFlavors() {
+            return new DataFlavor[]{directorFlavor};
+        }
+
+        @Override
+        public boolean isDataFlavorSupported(DataFlavor flavor) {
+            return flavor.equals(directorFlavor);
+        }
+
+        @Override
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+            if (!isDataFlavorSupported(flavor)) {
+                throw new UnsupportedFlavorException(flavor);
+            }
+            return director;
         }
     }
 

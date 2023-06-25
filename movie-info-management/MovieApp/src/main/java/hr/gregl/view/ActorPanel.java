@@ -7,10 +7,14 @@ package hr.gregl.view;
 import hr.gregl.controller.ActorController;
 import hr.gregl.controller.MovieActorDirectorController;
 import hr.gregl.model.Actor;
+import hr.gregl.model.MovieActorDirector;
 import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
 import hr.gregl.view.model.ActorTableModel;
 import hr.gregl.view.model.MovieActorDirectorTableModel;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +29,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.TransferHandler;
+import static javax.swing.TransferHandler.COPY;
 import javax.swing.text.JTextComponent;
 import static javax.swing.text.html.HTML.Attribute.DIR;
 
@@ -46,6 +54,7 @@ public class ActorPanel extends javax.swing.JPanel {
     private MovieActorDirectorTableModel madTableModel;
 
     private Actor selectedActor;
+    private MovieActorDirector movieActorDirector;
 
     /**
      * Creates new form ActorPanel
@@ -82,6 +91,11 @@ public class ActorPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbFilmography = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        tfActor = new javax.swing.JTextField();
+        cbMovies = new javax.swing.JComboBox<>();
+        cbDirectors = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        btnAddMAD = new javax.swing.JButton();
 
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 680));
@@ -97,7 +111,7 @@ public class ActorPanel extends javax.swing.JPanel {
         lbPicturePathError.setText("X");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 23;
         gridBagConstraints.ipady = 14;
@@ -140,11 +154,12 @@ public class ActorPanel extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 19;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridheight = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 560;
-        gridBagConstraints.ipady = 380;
+        gridBagConstraints.ipady = 334;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -156,7 +171,7 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 17;
+        gridBagConstraints.gridheight = 10;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 28, 0, 0);
@@ -236,7 +251,7 @@ public class ActorPanel extends javax.swing.JPanel {
         tfPicturePath.setPreferredSize(new java.awt.Dimension(40, 21));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 254;
@@ -254,7 +269,7 @@ public class ActorPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(19, 6, 0, 0);
         add(btnChooseImage, gridBagConstraints);
@@ -270,7 +285,6 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 8;
         gridBagConstraints.ipadx = 78;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -288,7 +302,6 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 8;
         gridBagConstraints.ipadx = 61;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -306,7 +319,7 @@ public class ActorPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 15;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipadx = 245;
         gridBagConstraints.ipady = 10;
@@ -340,11 +353,11 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 19;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 404;
-        gridBagConstraints.ipady = 132;
+        gridBagConstraints.ipady = 406;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -356,11 +369,62 @@ public class ActorPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 161;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
         add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 84;
+        gridBagConstraints.ipady = 26;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 0);
+        add(tfActor, gridBagConstraints);
+
+        cbMovies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.ipadx = 62;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(26, 6, 0, 0);
+        add(cbMovies, gridBagConstraints);
+
+        cbDirectors.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 15;
+        gridBagConstraints.gridy = 21;
+        gridBagConstraints.ipadx = 54;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(26, 6, 0, 16);
+        add(cbDirectors, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 24;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 382;
+        gridBagConstraints.ipady = 73;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 16);
+        add(jLabel1, gridBagConstraints);
+
+        btnAddMAD.setText("Add Filmography");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 23;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 345;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 6, 0, 16);
+        add(btnAddMAD, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbActorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActorsMouseClicked
@@ -461,9 +525,13 @@ public class ActorPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DateOfBirthError;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddMAD;
     private javax.swing.JButton btnChooseImage;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cbDirectors;
+    private javax.swing.JComboBox<String> cbMovies;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
@@ -474,6 +542,7 @@ public class ActorPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbPicturePathError;
     private javax.swing.JTable tbActors;
     private javax.swing.JTable tbFilmography;
+    private javax.swing.JTextField tfActor;
     private javax.swing.JTextField tfDateOfBirth;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPicturePath;
@@ -486,6 +555,7 @@ public class ActorPanel extends javax.swing.JPanel {
             initRepository();
             initTable();
             initTableFilmography();
+            initDragNDrop();
         } catch (Exception ex) {
             Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.showErrorMessage("Unrecoverable error", "Cannot initiate the form");
@@ -504,7 +574,7 @@ public class ActorPanel extends javax.swing.JPanel {
 
     private void initRepository() throws Exception {
         this.actorController = new ActorController();
-        this.madController = new  MovieActorDirectorController();
+        this.madController = new MovieActorDirectorController();
     }
 
     private void initTable() {
@@ -540,6 +610,7 @@ public class ActorPanel extends javax.swing.JPanel {
         tfName.setText("");
         tfDateOfBirth.setText("");
         tfPicturePath.setText("");
+        tfActor.setText("");
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png")));
     }
 
@@ -588,4 +659,87 @@ public class ActorPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+
+    // drag and drop
+    private void initDragNDrop() {
+        tbActors.setDragEnabled(true);
+        tbActors.setTransferHandler(new ExportTransferHandler());
+
+        tfActor.setTransferHandler(new ImportTransferHandler());
+    }
+
+    private class ExportTransferHandler extends TransferHandler {
+
+        @Override
+        public int getSourceActions(JComponent c) {
+            return COPY;
+        }
+
+        @Override
+        public Transferable createTransferable(JComponent c) {
+            JTable table = (JTable) c;
+            int selectedRow = table.getSelectedRow();
+            int rowIndex = table.convertRowIndexToModel(selectedRow);
+            int selectedActorId = (int) actorsTableModel.getValueAt(rowIndex, 0);
+
+            try {
+                Actor selectedActor = actorController.getActorById(selectedActorId);
+                return new ActorTransferable(selectedActor);
+            } catch (Exception ex) {
+                Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        }
+    }
+
+    private class ImportTransferHandler extends TransferHandler {
+
+        @Override
+        public boolean canImport(TransferHandler.TransferSupport support) {
+            return support.isDataFlavorSupported(ActorTransferable.actorFlavor);
+        }
+
+        @Override
+        public boolean importData(TransferHandler.TransferSupport support) {
+            Transferable transferable = support.getTransferable();
+            try {
+                Actor actor = (Actor) transferable.getTransferData(ActorTransferable.actorFlavor);
+                tfActor.setText(actor.getName());
+                movieActorDirector.setActorID(actor.getActorID());
+                return true;
+            } catch (UnsupportedFlavorException | IOException ex) {
+                Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+    }
+
+    public class ActorTransferable implements Transferable {
+
+        public static final DataFlavor actorFlavor = new DataFlavor(Actor.class, "java/Actor");
+        private Actor actor;
+
+        public ActorTransferable(Actor actor) {
+            this.actor = actor;
+        }
+
+        @Override
+        public DataFlavor[] getTransferDataFlavors() {
+            return new DataFlavor[]{actorFlavor};
+        }
+
+        @Override
+        public boolean isDataFlavorSupported(DataFlavor flavor) {
+            return flavor.equals(actorFlavor);
+        }
+
+        @Override
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+            if (!isDataFlavorSupported(flavor)) {
+                throw new UnsupportedFlavorException(flavor);
+            }
+            return actor;
+        }
+    }
+
 }

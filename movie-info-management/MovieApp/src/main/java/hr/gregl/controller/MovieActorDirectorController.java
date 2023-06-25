@@ -48,4 +48,9 @@ public class MovieActorDirectorController {
     public List<MovieActorDirector> selectAllMovieActorDirectors() {
         return this.movieActorDirectorRepository.selectAll();
     }
+
+    public void addMovieActorDirector(MovieActorDirector mad) {
+        this.movieActorDirectorRepository.add(mad);
+    }
+
 }

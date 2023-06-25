@@ -107,8 +107,10 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(jLabel4, gridBagConstraints);
 
+        btnRegister.setBackground(new java.awt.Color(153, 255, 204));
         btnRegister.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnRegister.setText("Register");
+        btnRegister.setMargin(new java.awt.Insets(10, 14, 3, 14));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
@@ -122,8 +124,10 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(btnRegister, gridBagConstraints);
 
+        btnLogin.setBackground(new java.awt.Color(153, 204, 255));
         btnLogin.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnLogin.setText("Login");
+        btnLogin.setMargin(new java.awt.Insets(10, 14, 3, 14));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
