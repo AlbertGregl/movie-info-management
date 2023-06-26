@@ -16,6 +16,7 @@ CREATE TABLE dbo.[Role] (
 GO
 
 INSERT INTO dbo.[Role] (RoleName) VALUES ('ADMINISTRATOR'), ('USER');
+GO
 
 -- Retrieve a role by id
 CREATE PROCEDURE selectRole
@@ -42,6 +43,7 @@ CREATE TABLE dbo.[User] (
 GO
 
 INSERT INTO dbo.[User] (Username, Password, RoleID) VALUES ('milica', 'milica', 2), ('pero', 'pero', 2), ('admin', 'admin', 1);
+GO
 
 -- Add a new user
 CREATE PROCEDURE addUser
@@ -136,12 +138,26 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE addMovieAndGetId
+    @title NVARCHAR(100),
+    @genre NVARCHAR(50),
+    @releaseYear INT,
+    @imagePath NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO dbo.[Movie] (Title, Genre, ReleaseYear, ImagePath)
+    VALUES (@title, @genre, @releaseYear, @imagePath);
+
+    SELECT SCOPE_IDENTITY() AS Id;
+END;
+GO
+
 -- Delete a movie
 CREATE PROCEDURE deleteMovie
     @movieID INT
 AS
 BEGIN
-    DELETE FROM dbo.MovieActorDirector
+    DELETE FROM dbo.[Movie]
     WHERE MovieID = @movieID;
 
     DELETE FROM dbo.[Movie] 
@@ -210,12 +226,25 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE addActorAndGetId
+    @name NVARCHAR(100),
+    @dob DATE,
+    @imagePath NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO dbo.[Actor] (Name, DOB, ImagePath)
+    VALUES (@name, @dob, @imagePath);
+
+    SELECT SCOPE_IDENTITY() AS Id;
+END;
+GO
+
 -- Delete an actor
 CREATE PROCEDURE deleteActor
     @actorID INT
 AS
 BEGIN
-    DELETE FROM dbo.MovieActorDirector
+    DELETE FROM dbo.[Actor]
     WHERE ActorID = @actorID;
 
     DELETE FROM dbo.[Actor] 
@@ -282,12 +311,26 @@ BEGIN
 END;
 GO
 
+
+CREATE PROCEDURE addDirectorAndGetId
+    @name NVARCHAR(100),
+    @dob DATE,
+    @imagePath NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO dbo.[Director] (Name, DOB, ImagePath)
+    VALUES (@name, @dob, @imagePath);
+
+    SELECT SCOPE_IDENTITY() AS Id;
+END;
+GO
+
 -- Delete a director
 CREATE PROCEDURE deleteDirector
     @directorID INT
 AS
 BEGIN
-    DELETE FROM dbo.MovieActorDirector
+    DELETE FROM dbo.[Director]
     WHERE DirectorID = @directorID;
 
     DELETE FROM dbo.[Director] 

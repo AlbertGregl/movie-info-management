@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 /**
@@ -27,10 +29,31 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     private static final String IMAGE_PATH = "ImagePath";
 
     private static final String ADD_DIRECTOR = "{ CALL addDirector (?,?,?) }";
+    private static final String ADD_DIRECTOR_AND_GET_ID = "{ CALL addDirectorAndGetId (?,?,?) }";
     private static final String DELETE_DIRECTOR = "{ CALL deleteDirector (?) }";
     private static final String UPDATE_DIRECTOR = "{ CALL updateDirector (?,?,?,?) }";
     private static final String SELECT_DIRECTOR = "{ CALL selectDirector (?) }";
     private static final String SELECT_ALL_DIRECTORS = "{ CALL selectAllDirectors }";
+    
+    @Override
+    public int addAndGetId(Director item) {
+        DataSource dataSource = DataSourceSingleton.getInstance();
+        try (Connection con = dataSource.getConnection(); CallableStatement stmt = con.prepareCall(ADD_DIRECTOR_AND_GET_ID)) {
+
+            stmt.setString(1, item.getName());
+            stmt.setString(2, item.getDob().format(DataSourceSingleton.DATE_FORMATTER));
+            stmt.setString(3, item.getImagePath());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("Id");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DirectorRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
 
     @Override
     public void add(Director item) {
@@ -43,7 +66,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // Handle exceptions
+            Logger.getLogger(DirectorRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -56,7 +79,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // Handle exceptions
+            Logger.getLogger(DirectorRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,7 +95,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // Handle exceptions
+            Logger.getLogger(DirectorRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,7 +116,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
                 }
             }
         } catch (SQLException ex) {
-            // Handle exceptions
+            Logger.getLogger(DirectorRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -112,7 +135,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
                         rs.getString(IMAGE_PATH)));
             }
         } catch (SQLException ex) {
-            // Handle exceptions
+            Logger.getLogger(DirectorRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return directors;
     }

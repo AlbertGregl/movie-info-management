@@ -5,6 +5,11 @@
 package hr.gregl.view;
 
 import hr.gregl.controller.AdminController;
+import hr.gregl.utilities.MessageUtils;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,16 +36,32 @@ public class AdminPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnLoadRssData = new javax.swing.JButton();
+        btnDeleteData = new javax.swing.JButton();
+        btnLoadRssData1 = new javax.swing.JButton();
 
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMaximumSize(new java.awt.Dimension(1024, 680));
         setMinimumSize(new java.awt.Dimension(1024, 680));
 
-        btnLoadRssData.setText("Load RSS Data");
-        btnLoadRssData.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteData.setBackground(new java.awt.Color(204, 0, 0));
+        btnDeleteData.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
+        btnDeleteData.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteData.setText("Delete Data");
+        btnDeleteData.setMargin(new java.awt.Insets(10, 14, 1, 14));
+        btnDeleteData.setName(""); // NOI18N
+        btnDeleteData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadRssDataActionPerformed(evt);
+                btnDeleteDataActionPerformed(evt);
+            }
+        });
+
+        btnLoadRssData1.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
+        btnLoadRssData1.setText("Load RSS Data");
+        btnLoadRssData1.setMargin(new java.awt.Insets(10, 14, 1, 14));
+        btnLoadRssData1.setName(""); // NOI18N
+        btnLoadRssData1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadRssData1ActionPerformed(evt);
             }
         });
 
@@ -49,25 +70,45 @@ public class AdminPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(435, 435, 435)
-                .addComponent(btnLoadRssData, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addContainerGap(409, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLoadRssData1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(btnDeleteData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(btnLoadRssData, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(518, Short.MAX_VALUE))
+                .addGap(104, 104, 104)
+                .addComponent(btnLoadRssData1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(437, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoadRssDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadRssDataActionPerformed
+    private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
+
+        if (MessageUtils.showConfirmDialog(
+                "Delete Data from Database",
+                "Do you really want to delete all Data from the database?")) {
+            try {
+                adminController.deleteAllDataFromDatabase();
+            } catch (Exception ex) {
+                Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
+                MessageUtils.showErrorMessage("Error", "Unable to delete data!");
+            }
+        }
+
+    }//GEN-LAST:event_btnDeleteDataActionPerformed
+
+    private void btnLoadRssData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadRssData1ActionPerformed
         adminController.parseAndSaveDataFromRSS();
-    }//GEN-LAST:event_btnLoadRssDataActionPerformed
+    }//GEN-LAST:event_btnLoadRssData1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLoadRssData;
+    private javax.swing.JButton btnDeleteData;
+    private javax.swing.JButton btnLoadRssData1;
     // End of variables declaration//GEN-END:variables
 }

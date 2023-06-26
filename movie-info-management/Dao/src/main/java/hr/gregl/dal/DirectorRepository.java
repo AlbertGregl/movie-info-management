@@ -11,4 +11,6 @@ import hr.gregl.model.Director;
  * @author albert
  */
 public interface DirectorRepository extends Repository<Director> {
+
+    public int addAndGetId(Director item);
 }

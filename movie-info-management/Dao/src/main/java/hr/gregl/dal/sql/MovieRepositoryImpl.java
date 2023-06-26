@@ -27,10 +27,31 @@ public class MovieRepositoryImpl implements MovieRepository {
     private static final String IMAGE_PATH = "ImagePath";
 
     private static final String ADD_MOVIE = "{ CALL addMovie (?,?,?,?) }";
+    private static final String ADD_MOVIE_AND_GET_ID = "{ CALL addMovieAndGetId (?,?,?,?) }";
     private static final String DELETE_MOVIE = "{ CALL deleteMovie (?) }";
     private static final String UPDATE_MOVIE = "{ CALL updateMovie (?,?,?,?,?) }";
     private static final String SELECT_MOVIE = "{ CALL selectMovie (?) }";
     private static final String SELECT_ALL_MOVIES = "{ CALL selectAllMovies }";
+
+    @Override
+    public int addAndGetId(Movie item) {
+        DataSource dataSource = DataSourceSingleton.getInstance();
+        try (Connection con = dataSource.getConnection(); CallableStatement stmt = con.prepareCall(ADD_MOVIE_AND_GET_ID)) {
+            stmt.setString(1, item.getTitle());
+            stmt.setString(2, item.getGenre());
+            stmt.setInt(3, item.getReleaseYear());
+            stmt.setString(4, item.getImagePath());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("Id");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
 
     @Override
     public void add(Movie item) {

@@ -27,6 +27,12 @@ public class MovieRss {
     @XmlElement(name = "plakat")
     private String imagePath;
 
+    @XmlElement(name = "redatelj")
+    private String directorName;
+
+    @XmlElement(name = "glumci")
+    private String actorsNames;
+
     public MovieRss() {
     }
 
@@ -60,6 +66,22 @@ public class MovieRss {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
+    public String getActorsNames() {
+        return actorsNames;
+    }
+
+    public void setActorsNames(String actorsNames) {
+        this.actorsNames = actorsNames;
     }
 
 }

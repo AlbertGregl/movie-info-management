@@ -39,7 +39,7 @@ public class MovieActorDirectorRepositoryImpl implements MovieActorDirectorRepos
 
             stmt.executeUpdate();
         } catch (Exception e) {
-            // Handle Exception
+            e.printStackTrace();
         }
     }
 
@@ -54,7 +54,7 @@ public class MovieActorDirectorRepositoryImpl implements MovieActorDirectorRepos
 
             stmt.executeUpdate();
         } catch (Exception e) {
-            // Handle Exception
+            e.printStackTrace();
         }
     }
 
@@ -76,7 +76,7 @@ public class MovieActorDirectorRepositoryImpl implements MovieActorDirectorRepos
                 }
             }
         } catch (Exception e) {
-            // Handle Exception
+            e.printStackTrace();
         }
         return null;
     }
@@ -94,7 +94,7 @@ public class MovieActorDirectorRepositoryImpl implements MovieActorDirectorRepos
                         rs.getInt(DIRECTOR_ID)));
             }
         } catch (Exception e) {
-            // Handle Exception
+            e.printStackTrace();
         }
         return mads;
     }

@@ -11,4 +11,6 @@ import hr.gregl.model.Movie;
  * @author albert
  */
 public interface MovieRepository extends Repository<Movie> {
+
+    public int addAndGetId(Movie item);
 }

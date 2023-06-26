@@ -11,4 +11,6 @@ import hr.gregl.model.Actor;
  * @author albert
  */
 public interface ActorRepository extends Repository<Actor> {
+
+    public int addAndGetId(Actor item);
 }

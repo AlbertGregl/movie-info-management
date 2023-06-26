@@ -701,6 +701,11 @@ public class ActorPanel extends javax.swing.JPanel {
         allMovies = madController.getAllMovies();
         fillDirectorsComboBox();
         fillMoviesComboBox();
+        
+        
+        if (allDirectors.isEmpty() || allMovies.isEmpty()) {
+            return;
+        }
 
         // set movieActorDirector to the first actor/movie from the list
         Director firstDirector = allDirectors.get(0);
