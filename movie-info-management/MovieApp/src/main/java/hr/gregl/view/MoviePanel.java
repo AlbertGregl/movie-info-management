@@ -82,6 +82,7 @@ public class MoviePanel extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 102));
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 680));
         setName(""); // NOI18N

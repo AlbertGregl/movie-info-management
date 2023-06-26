@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  * @author albert
  */
 public final class DataSourceSingleton {
-    
+
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private static final String PATH = "/config/db.properties";

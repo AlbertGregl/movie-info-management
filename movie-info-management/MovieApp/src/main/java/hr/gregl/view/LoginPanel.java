@@ -8,6 +8,8 @@ import hr.gregl.controller.LoginController;
 import hr.gregl.listeners.LoginListener;
 import hr.gregl.model.User;
 import hr.gregl.model.Role;
+import hr.gregl.service.DatabaseService;
+import hr.gregl.utilities.MessageUtils;
 
 /**
  *
@@ -28,9 +30,7 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     public LoginPanel() {
         initComponents();
-        this.loginController = new LoginController();
 
-        lblSuccess.setVisible(false);
     }
 
     /**
@@ -54,6 +54,11 @@ public class LoginPanel extends javax.swing.JPanel {
         tfPassword = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 204, 102));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -157,6 +162,12 @@ public class LoginPanel extends javax.swing.JPanel {
         add(tfPassword, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        initValidation();
+        initRepo();
+        initLabels();
+    }//GEN-LAST:event_formComponentShown
+
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
         String username = tfUsername.getText();
         String password = tfPassword.getText();
@@ -194,4 +205,20 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void initValidation() {
+        DatabaseService databaseService = new DatabaseService();
+        if (!databaseService.testDatabaseConnection()) {
+            MessageUtils.showErrorMessage("Unrecoverable error", "Database connection failed. Exit...");
+            System.exit(1);
+        }
+    }
+
+    private void initRepo() {
+        this.loginController = new LoginController();
+    }
+
+    private void initLabels() {
+        lblSuccess.setVisible(false);
+    }
 }

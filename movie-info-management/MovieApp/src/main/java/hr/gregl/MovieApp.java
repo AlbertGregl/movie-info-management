@@ -28,8 +28,8 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
         initComponents();
 
         setUpForm();
-
         setupUser();
+
     }
 
     /**
@@ -102,7 +102,7 @@ public class MovieApp extends javax.swing.JFrame implements LoginListener {
     private void menuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLogoutActionPerformed
         // remove all tabs
         tpContent.removeAll();
-        
+
         setUpForm();
         setupUser();
     }//GEN-LAST:event_menuItemLogoutActionPerformed

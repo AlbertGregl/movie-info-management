@@ -33,7 +33,7 @@ public class LoginController {
         return null;
     }
 
-// user registration
+    // user registration
     public void register(User user) {
         this.userRepository.add(user);
     }

@@ -7,11 +7,16 @@ package hr.gregl.view;
 import hr.gregl.controller.AdminController;
 import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Toolkit;
 import java.io.File;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import static javax.swing.text.html.HTML.Attribute.DIR;
 
 /**
@@ -38,13 +43,16 @@ public class AdminPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         btnDeleteData = new javax.swing.JButton();
         btnLoadRssData1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 102));
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMaximumSize(new java.awt.Dimension(1024, 680));
         setMinimumSize(new java.awt.Dimension(1024, 680));
+        setLayout(new java.awt.GridBagLayout());
 
         btnDeleteData.setBackground(new java.awt.Color(204, 0, 0));
         btnDeleteData.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -57,6 +65,14 @@ public class AdminPanel extends javax.swing.JPanel {
                 btnDeleteDataActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 173;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(67, 409, 437, 342);
+        add(btnDeleteData, gridBagConstraints);
 
         btnLoadRssData1.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
         btnLoadRssData1.setText("Load RSS Data");
@@ -67,27 +83,14 @@ public class AdminPanel extends javax.swing.JPanel {
                 btnLoadRssData1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(409, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLoadRssData1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                    .addComponent(btnDeleteData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(333, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(btnLoadRssData1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(btnDeleteData, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(437, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 158;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(104, 409, 0, 342);
+        add(btnLoadRssData1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
@@ -110,7 +113,33 @@ public class AdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteDataActionPerformed
 
     private void btnLoadRssData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadRssData1ActionPerformed
-        adminController.parseAndSaveDataFromRSS();
+        final JDialog loading = new JDialog((Frame) null, "Loading, please wait...", true);
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Load the data...
+                adminController.parseAndSaveDataFromRSS();
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                loading.dispose();
+            }
+        };
+
+        worker.execute();
+
+        JOptionPane optionPane = new JOptionPane("Loading, please wait...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+        loading.setContentPane(optionPane);
+        loading.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        loading.pack();
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        loading.setLocation((screenSize.width - loading.getSize().width) / 2, (screenSize.height - loading.getSize().height) / 2);
+
+        loading.setVisible(true);
     }//GEN-LAST:event_btnLoadRssData1ActionPerformed
 
 

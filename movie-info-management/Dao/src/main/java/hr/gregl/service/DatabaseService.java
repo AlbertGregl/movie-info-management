@@ -37,7 +37,6 @@ public class DatabaseService {
         executeSqlScript(DELETE_DATA_SCRIPT_PATH);
     }
 
-
     private void executeSqlScript(String scriptPath) {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(scriptPath)) {
             if (is == null) {
@@ -64,5 +63,14 @@ public class DatabaseService {
         }
     }
 
+    public boolean testDatabaseConnection() {
+        try (Connection connection = DataSourceSingleton.getInstance().getConnection(); Statement statement = connection.createStatement()) {
+            statement.execute("SELECT 1");
+            return true;
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Failed to connect to the database.", ex);
+            return false;
+        }
+    }
 
 }

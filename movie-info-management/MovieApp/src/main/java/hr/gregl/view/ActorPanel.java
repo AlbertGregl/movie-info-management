@@ -107,6 +107,7 @@ public class ActorPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnAddMAD = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 102));
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 680));
         setPreferredSize(new java.awt.Dimension(1024, 680));
@@ -189,7 +190,7 @@ public class ActorPanel extends javax.swing.JPanel {
         add(lbIcon, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
-        jLabel8.setText("Date Of Birth (yyyy-mm-dd)");
+        jLabel8.setText("Date Of Birth (yyyy-MM-dd)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;

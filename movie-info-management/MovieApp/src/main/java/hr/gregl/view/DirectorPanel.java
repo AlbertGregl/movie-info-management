@@ -107,6 +107,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnAddMAD = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 102));
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         setMinimumSize(new java.awt.Dimension(1024, 680));
         setPreferredSize(new java.awt.Dimension(1024, 680));
@@ -173,7 +174,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 11, 3, 0);
+        gridBagConstraints.insets = new java.awt.Insets(14, 6, 0, 0);
         add(jScrollPane1, gridBagConstraints);
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png"))); // NOI18N
@@ -185,11 +186,11 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = -23;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 28, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 28, 0, 0);
         add(lbIcon, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
-        jLabel8.setText("Date Of Birth (yyyy-mm-dd)");
+        jLabel8.setText("Date Of Birth (yyyy-MM-dd)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -197,7 +198,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 17, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(27, 12, 0, 0);
         add(jLabel8, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -210,7 +211,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 61;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(19, 14, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(22, 9, 0, 0);
         add(jLabel2, gridBagConstraints);
 
         tfDateOfBirth.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -221,7 +222,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 253;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 17, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 12, 0, 0);
         add(tfDateOfBirth, gridBagConstraints);
 
         tfName.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -231,7 +232,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 253;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 17, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 12, 0, 0);
         add(tfName, gridBagConstraints);
 
         DateOfBirthError.setForeground(new java.awt.Color(204, 0, 0));
@@ -269,7 +270,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 254;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 17, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(15, 12, 0, 0);
         add(tfPicturePath, gridBagConstraints);
 
         btnChooseImage.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -299,7 +300,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 78;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 17, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 12, 0, 0);
         add(btnAdd, gridBagConstraints);
 
         btnUpdate.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -335,7 +336,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 245;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 17, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(11, 12, 0, 0);
         add(btnDelete, gridBagConstraints);
 
         jScrollPane2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -372,7 +373,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 15);
         add(jScrollPane2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -384,7 +385,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 161;
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
         add(jLabel3, gridBagConstraints);
 
         tfDirector.setMaximumSize(new java.awt.Dimension(156, 52));
@@ -429,7 +430,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 382;
         gridBagConstraints.ipady = 83;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 6, 3, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 0);
         add(jLabel1, gridBagConstraints);
 
         btnAddMAD.setText("Add Filmography");
@@ -445,7 +446,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 322;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 15);
         add(btnAddMAD, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
