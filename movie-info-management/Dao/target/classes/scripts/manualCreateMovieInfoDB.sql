@@ -152,19 +152,6 @@ BEGIN
 END;
 GO
 
--- Delete a movie
-CREATE PROCEDURE deleteMovie
-    @movieID INT
-AS
-BEGIN
-    DELETE FROM dbo.[Movie]
-    WHERE MovieID = @movieID;
-
-    DELETE FROM dbo.[Movie] 
-    WHERE MovieID = @movieID;
-END;
-GO
-
 -- Update a movie
 CREATE PROCEDURE updateMovie
     @movieID INT,
@@ -239,19 +226,6 @@ BEGIN
 END;
 GO
 
--- Delete an actor
-CREATE PROCEDURE deleteActor
-    @actorID INT
-AS
-BEGIN
-    DELETE FROM dbo.[Actor]
-    WHERE ActorID = @actorID;
-
-    DELETE FROM dbo.[Actor] 
-    WHERE ActorID = @actorID;
-END;
-GO
-
 -- Update an actor
 CREATE PROCEDURE updateActor
     @actorID INT,
@@ -322,19 +296,6 @@ BEGIN
     VALUES (@name, @dob, @imagePath);
 
     SELECT SCOPE_IDENTITY() AS Id;
-END;
-GO
-
--- Delete a director
-CREATE PROCEDURE deleteDirector
-    @directorID INT
-AS
-BEGIN
-    DELETE FROM dbo.[Director]
-    WHERE DirectorID = @directorID;
-
-    DELETE FROM dbo.[Director] 
-    WHERE DirectorID = @directorID;
 END;
 GO
 
@@ -430,6 +391,47 @@ CREATE PROCEDURE selectAllMovieActorDirectors
 AS
 BEGIN
     SELECT * FROM dbo.[MovieActorDirector];
+END;
+GO
+
+------------------------------------------------------------
+
+-- Delete a movie
+CREATE PROCEDURE deleteMovie
+    @movieID INT
+AS
+BEGIN
+    DELETE FROM dbo.[MovieActorDirector]
+    WHERE MovieID = @movieID;
+
+    DELETE FROM dbo.[Movie] 
+    WHERE MovieID = @movieID;
+END;
+GO
+
+-- Delete an actor
+CREATE PROCEDURE deleteActor
+    @actorID INT
+AS
+BEGIN
+    DELETE FROM dbo.[MovieActorDirector]
+    WHERE ActorID = @actorID;
+
+    DELETE FROM dbo.[Actor] 
+    WHERE ActorID = @actorID;
+END;
+GO
+
+-- Delete a director
+CREATE PROCEDURE deleteDirector
+    @directorID INT
+AS
+BEGIN
+    DELETE FROM dbo.[MovieActorDirector]
+    WHERE DirectorID = @directorID;
+
+    DELETE FROM dbo.[Director] 
+    WHERE DirectorID = @directorID;
 END;
 GO
 
