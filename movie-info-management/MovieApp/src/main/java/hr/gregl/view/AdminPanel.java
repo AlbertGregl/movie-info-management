@@ -46,7 +46,11 @@ public class AdminPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         btnDeleteData = new javax.swing.JButton();
-        btnLoadRssData1 = new javax.swing.JButton();
+        btnLoadRssData = new javax.swing.JButton();
+        btnLocalMockData = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 204, 102));
         setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -67,30 +71,83 @@ public class AdminPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 173;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 211;
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(67, 409, 437, 342);
+        gridBagConstraints.insets = new java.awt.Insets(77, 335, 273, 369);
         add(btnDeleteData, gridBagConstraints);
 
-        btnLoadRssData1.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
-        btnLoadRssData1.setText("Load RSS Data");
-        btnLoadRssData1.setMargin(new java.awt.Insets(10, 14, 1, 14));
-        btnLoadRssData1.setName(""); // NOI18N
-        btnLoadRssData1.addActionListener(new java.awt.event.ActionListener() {
+        btnLoadRssData.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
+        btnLoadRssData.setText("Load RSS Data");
+        btnLoadRssData.setMargin(new java.awt.Insets(10, 14, 1, 14));
+        btnLoadRssData.setName(""); // NOI18N
+        btnLoadRssData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadRssData1ActionPerformed(evt);
+                btnLoadRssDataActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 158;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 196;
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(104, 409, 0, 342);
-        add(btnLoadRssData1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(6, 335, 0, 369);
+        add(btnLoadRssData, gridBagConstraints);
+
+        btnLocalMockData.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
+        btnLocalMockData.setText("Load Mock Data");
+        btnLocalMockData.setMargin(new java.awt.Insets(10, 14, 1, 14));
+        btnLocalMockData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocalMockDataActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 189;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 335, 0, 369);
+        add(btnLocalMockData, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Consolas", 2, 12)); // NOI18N
+        jLabel1.setText("https://www.blitz-cinestar-bh.ba/rss.aspx?id=2682 ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(101, 335, 0, 369);
+        add(jLabel1, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jLabel2.setText("Mockaroo data");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(65, 345, 0, 0);
+        add(jLabel2, gridBagConstraints);
+
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jLabel3.setText("Online data from:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(83, 345, 0, 0);
+        add(jLabel3, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDataActionPerformed
@@ -112,7 +169,7 @@ public class AdminPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnDeleteDataActionPerformed
 
-    private void btnLoadRssData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadRssData1ActionPerformed
+    private void btnLoadRssDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadRssDataActionPerformed
         final JDialog loading = new JDialog((Frame) null, "Loading, please wait...", true);
 
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
@@ -140,11 +197,19 @@ public class AdminPanel extends javax.swing.JPanel {
         loading.setLocation((screenSize.width - loading.getSize().width) / 2, (screenSize.height - loading.getSize().height) / 2);
 
         loading.setVisible(true);
-    }//GEN-LAST:event_btnLoadRssData1ActionPerformed
+    }//GEN-LAST:event_btnLoadRssDataActionPerformed
+
+    private void btnLocalMockDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalMockDataActionPerformed
+        adminController.fillMockData();
+    }//GEN-LAST:event_btnLocalMockDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteData;
-    private javax.swing.JButton btnLoadRssData1;
+    private javax.swing.JButton btnLoadRssData;
+    private javax.swing.JButton btnLocalMockData;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

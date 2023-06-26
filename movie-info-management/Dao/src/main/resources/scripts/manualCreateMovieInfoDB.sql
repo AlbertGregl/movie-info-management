@@ -35,7 +35,7 @@ GO
 -- Creating User Table
 CREATE TABLE dbo.[User] (
     UserID INT PRIMARY KEY IDENTITY(1,1),
-    Username NVARCHAR(50) NOT NULL,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
     Password NVARCHAR(50) NOT NULL,
     RoleID INT NOT NULL,
     FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
@@ -52,8 +52,16 @@ CREATE PROCEDURE addUser
     @roleID INT
 AS
 BEGIN
-    INSERT INTO dbo.[User] (Username, Password, RoleID)
-    VALUES (@username, @password, @roleID);
+    BEGIN TRY
+        INSERT INTO dbo.[User] (Username, Password, RoleID)
+        VALUES (@username, @password, @roleID);
+    END TRY
+    BEGIN CATCH
+        IF ERROR_NUMBER() = 2627
+            PRINT 'A user with the same username already exists.'
+        ELSE
+            THROW;
+    END CATCH
 END;
 GO
 
@@ -118,7 +126,7 @@ GO
 -- Creating Movie Table
 CREATE TABLE dbo.[Movie] (
     MovieID INT PRIMARY KEY IDENTITY(1,1),
-    Title NVARCHAR(100) NOT NULL,
+    Title NVARCHAR(100) NOT NULL UNIQUE,
     Genre NVARCHAR(50),
     ReleaseYear INT,
     ImagePath NVARCHAR(255)
@@ -195,7 +203,7 @@ GO
 -- Creating Actor Table
 CREATE TABLE dbo.[Actor] (
     ActorID INT PRIMARY KEY IDENTITY(1,1),
-    Name NVARCHAR(100) NOT NULL,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
     DOB DATE,
     ImagePath NVARCHAR(255)
 );
@@ -267,7 +275,7 @@ GO
 -- Creating Director Table
 CREATE TABLE dbo.[Director] (
     DirectorID INT PRIMARY KEY IDENTITY(1,1),
-    Name NVARCHAR(100) NOT NULL,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
     DOB DATE,
     ImagePath NVARCHAR(255)
 );

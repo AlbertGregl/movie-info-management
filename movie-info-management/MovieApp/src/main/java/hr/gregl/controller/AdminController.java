@@ -62,4 +62,8 @@ public class AdminController {
             ex.printStackTrace();
         }
     }
+    
+    public void fillMockData(){
+        this.databaseService.fillDatabaseWithMockData();
+    }
 }
