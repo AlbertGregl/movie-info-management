@@ -11,6 +11,7 @@ import hr.gregl.model.Director;
 import hr.gregl.model.Movie;
 import hr.gregl.model.MovieActorDirector;
 import hr.gregl.utilities.FileUtils;
+import hr.gregl.utilities.IconUtils;
 import hr.gregl.utilities.MessageUtils;
 import hr.gregl.view.model.DirectorTableModel;
 import hr.gregl.view.model.MovieActorDirectorTableModel;
@@ -47,6 +48,8 @@ import static javax.swing.text.html.HTML.Attribute.DIR;
  * @author albert
  */
 public class DirectorPanel extends javax.swing.JPanel {
+    
+    private static final int MAX_ICON_HEIGHT = 260;
 
     private DirectorController directorController;
     private MovieActorDirectorController madController;
@@ -691,7 +694,7 @@ public class DirectorPanel extends javax.swing.JPanel {
         try {
             BufferedImage image = ImageIO.read(file);
             ImageIcon icon = new ImageIcon(image);
-            label.setIcon(icon);
+            label.setIcon(IconUtils.scaleImageToHeight(icon, MAX_ICON_HEIGHT));
         } catch (IOException e) {
             e.printStackTrace();
         }

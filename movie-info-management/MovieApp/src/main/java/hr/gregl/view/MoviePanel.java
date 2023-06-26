@@ -7,6 +7,7 @@ package hr.gregl.view;
 import hr.gregl.controller.MovieController;
 import hr.gregl.model.Movie;
 import hr.gregl.utilities.FileUtils;
+import hr.gregl.utilities.IconUtils;
 import hr.gregl.utilities.MessageUtils;
 import hr.gregl.view.model.MovieTableModel;
 import java.awt.image.BufferedImage;
@@ -33,6 +34,8 @@ import static javax.swing.text.html.HTML.Attribute.DIR;
  * @author albert
  */
 public class MoviePanel extends javax.swing.JPanel {
+    
+    private static final int MAX_ICON_HEIGHT = 260;
 
     private MovieController movieController;
 
@@ -93,7 +96,7 @@ public class MoviePanel extends javax.swing.JPanel {
         lbPicturePathError.setForeground(new java.awt.Color(204, 0, 0));
         lbPicturePathError.setText("X");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 14;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 23;
@@ -136,10 +139,10 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.gridwidth = 16;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 996;
-        gridBagConstraints.ipady = 600;
+        gridBagConstraints.ipady = 263;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -148,12 +151,14 @@ public class MoviePanel extends javax.swing.JPanel {
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/no_image.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 11;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 13;
+        gridBagConstraints.gridheight = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 11;
         gridBagConstraints.ipady = 30;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 190, 0, 0);
         add(lbIcon, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -173,6 +178,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 61;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -203,7 +209,7 @@ public class MoviePanel extends javax.swing.JPanel {
         ReleaseYearError.setForeground(new java.awt.Color(204, 0, 0));
         ReleaseYearError.setText("X");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 13;
@@ -215,7 +221,7 @@ public class MoviePanel extends javax.swing.JPanel {
         lbTitleError.setForeground(new java.awt.Color(204, 0, 0));
         lbTitleError.setText("X");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 13;
@@ -228,11 +234,12 @@ public class MoviePanel extends javax.swing.JPanel {
         tfPicturePath.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         tfPicturePath.setPreferredSize(new java.awt.Dimension(40, 21));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 346;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(22, 6, 0, 0);
         add(tfPicturePath, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 13)); // NOI18N
@@ -240,7 +247,6 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 53;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -255,11 +261,10 @@ public class MoviePanel extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        gridBagConstraints.insets = new java.awt.Insets(6, 18, 0, 0);
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 18, 0, 0);
         add(btnChooseImage, gridBagConstraints);
 
         tfGenre.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -292,7 +297,7 @@ public class MoviePanel extends javax.swing.JPanel {
         lbGenreError.setForeground(new java.awt.Color(204, 0, 0));
         lbGenreError.setText("X");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 13;
@@ -311,6 +316,7 @@ public class MoviePanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.ipadx = 61;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -328,12 +334,12 @@ public class MoviePanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 10;
         gridBagConstraints.ipadx = 245;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 18, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(11, 18, 0, 0);
         add(btnDelete, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -557,7 +563,7 @@ public class MoviePanel extends javax.swing.JPanel {
         try {
             BufferedImage image = ImageIO.read(file);
             ImageIcon icon = new ImageIcon(image);
-            label.setIcon(icon);
+            label.setIcon(IconUtils.scaleImageToHeight(icon, MAX_ICON_HEIGHT));
         } catch (IOException e) {
             e.printStackTrace();
         }

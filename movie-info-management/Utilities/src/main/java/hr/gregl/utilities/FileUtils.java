@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import javax.swing.JFileChooser;
@@ -20,7 +23,7 @@ import javax.swing.filechooser.FileSystemView;
 
 /**
  *
- * @author dnlbe
+ * @author dnlbe & albert
  */
 public class FileUtils {
 
@@ -61,6 +64,18 @@ public class FileUtils {
         HttpURLConnection con = UrlConnectionFactory.getHttpUrlConnection(source);
         try (InputStream is = con.getInputStream()) {
             Files.copy(is, Paths.get(destination));
+        }
+    }
+
+    public static void deleteFilesInDirectory(Path path) throws IOException {
+        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
+            try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
+                for (Path entry : entries) {
+                    if (!Files.isDirectory(entry)) {
+                        Files.delete(entry);
+                    }
+                }
+            }
         }
     }
 

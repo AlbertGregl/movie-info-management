@@ -5,11 +5,14 @@
 package hr.gregl.view;
 
 import hr.gregl.controller.AdminController;
+import hr.gregl.utilities.FileUtils;
 import hr.gregl.utilities.MessageUtils;
-import java.nio.file.Files;
+import java.io.File;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.text.html.HTML.Attribute.DIR;
 
 /**
  *
@@ -93,7 +96,11 @@ public class AdminPanel extends javax.swing.JPanel {
                 "Delete Data from Database",
                 "Do you really want to delete all Data from the database?")) {
             try {
+                // Delete Data from database
                 adminController.deleteAllDataFromDatabase();
+                // Delete all images in the directory
+                String directoryPath = DIR + File.separator;
+                FileUtils.deleteFilesInDirectory(Paths.get(directoryPath));
             } catch (Exception ex) {
                 Logger.getLogger(ActorPanel.class.getName()).log(Level.SEVERE, null, ex);
                 MessageUtils.showErrorMessage("Error", "Unable to delete data!");
